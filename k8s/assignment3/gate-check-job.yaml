@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ragops-gate-check
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: ragops-gate-check}
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
+      volumes:
+        - name: ragops-data
+          persistentVolumeClaim: {claimName: ragops-data}
+        - name: thresholds
+          configMap: {name: ragops-gates}
+      containers:
+        - name: gate
+          image: rahbar-eval:dev
+          imagePullPolicy: IfNotPresent
+          command: [sh, -ec]
+          args:
+            - >-
+              latest=$(ls -1t /var/lib/rahbar/results/run-*.json | head -n 1);
+              python -m eval.assignment3.gate --candidate "$latest"
+              --baseline /var/lib/rahbar/results/baseline.json
+              --thresholds /etc/rahbar/gates/gate.yaml
+              --out /var/lib/rahbar/results/gate-check-latest.json
+          volumeMounts:
+            - {name: ragops-data, mountPath: /var/lib/rahbar}
+            - {name: thresholds, mountPath: /etc/rahbar/gates, readOnly: true}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: "1", memory: 1Gi}

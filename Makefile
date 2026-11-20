@@ -14,7 +14,7 @@ INGRESS_IP ?= $(shell minikube -p $(PROFILE) ip 2>/dev/null)
 HOST ?= rahbar.local
 
 .DEFAULT_GOAL := help
-.PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check deploy-real audit-live calibrate-cache evidence rollout-demo ragops-data ragops-image ragops-suite ragops-coverage ragops-traces ragops-gate ragops-batch-b ragops-candidate ragops-baseline-job ragops-eval-job ragops-report
+.PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check deploy-real audit-live calibrate-cache evidence rollout-demo ragops-data ragops-image ragops-suite ragops-coverage ragops-traces ragops-gate ragops-batch-b ragops-candidate ragops-baseline-job ragops-eval-job ragops-gate-job ragops-report
 
 help: ## list the targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-14s %s\n", $$1, $$2}'
@@ -125,6 +125,9 @@ ragops-baseline-job: ## capture the fixed-pipeline live baseline on rahbar
 
 ragops-eval-job: ## launch the persistent-volume evaluation and release-gate Job
 	kubectl apply -f k8s/assignment3/eval-job.yaml
+
+ragops-gate-job: ## run the gate against saved results using the mounted runtime ConfigMap
+	kubectl apply -f k8s/assignment3/gate-check-job.yaml
 
 ragops-report: ## render the six-page report and screenshot appendix from measured evidence
 	PYTHONPATH="$(REPORT_LIBS):$${PYTHONPATH:-}" "$(BIN)/python" docs/assignment3/build_report.py
