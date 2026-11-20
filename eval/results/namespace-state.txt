@@ -1,0 +1,62 @@
+NAME                                 READY   STATUS      RESTARTS   AGE
+pod/api-54dcdbfbbb-2kt6k             1/1     Running     0          67m
+pod/api-54dcdbfbbb-krvrw             1/1     Running     0          67m
+pod/api-54dcdbfbbb-kvpq5             1/1     Running     0          67m
+pod/api-candidate-7799dbbb46-msnmv   1/1     Running     0          52m
+pod/batch-b-index-9cg7h              0/1     Completed   0          32m
+pod/candidate-index-nh7pv            0/1     Completed   0          30m
+pod/chroma-0                         1/1     Running     0          96m
+pod/initial-index-9g6q2              0/1     Completed   0          60m
+pod/ragops-baseline-cv5nf            0/1     Completed   0          22m
+pod/ragops-eval-g9n4x                0/1     Error       0          18m
+pod/ragops-gate-check-cc7rf          0/1     Error       0          2m37s
+pod/redis-77dc66677-x4zkk            1/1     Running     0          96m
+pod/ui-5cb48568f6-lnslx              1/1     Running     0          96m
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/api             ClusterIP   10.108.174.190   <none>        8000/TCP   96m
+service/api-candidate   ClusterIP   10.99.91.110     <none>        8000/TCP   52m
+service/chroma          ClusterIP   10.97.223.188    <none>        8000/TCP   96m
+service/redis           ClusterIP   10.96.250.99     <none>        6379/TCP   96m
+service/ui              ClusterIP   10.108.233.227   <none>        8080/TCP   96m
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api             3/3     3            3           96m
+deployment.apps/api-candidate   1/1     1            1           52m
+deployment.apps/redis           1/1     1            1           96m
+deployment.apps/ui              1/1     1            1           96m
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-548f868954             0         0         0       96m
+replicaset.apps/api-54dcdbfbbb             3         3         3       67m
+replicaset.apps/api-68567477b5             0         0         0       113s
+replicaset.apps/api-candidate-7799dbbb46   1         1         1       52m
+replicaset.apps/redis-77dc66677            1         1         1       96m
+replicaset.apps/ui-5cb48568f6              1         1         1       96m
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     96m
+
+NAME                                      REFERENCE        TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/api   Deployment/api   cpu: 3%/70%   3         8         3          96m
+
+NAME                    SCHEDULE    TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/reindex   0 2 * * 0   <none>     False     0        <none>          96m
+
+NAME                          STATUS     COMPLETIONS   DURATION   AGE
+job.batch/batch-b-index       Complete   1/1           101s       32m
+job.batch/candidate-index     Complete   1/1           101s       30m
+job.batch/initial-index       Complete   1/1           101s       60m
+job.batch/ragops-baseline     Complete   1/1           3m23s      22m
+job.batch/ragops-eval         Failed     0/1           18m        18m
+job.batch/ragops-gate-check   Failed     0/1           2m37s      2m37s
+
+NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/chroma-data-chroma-0   Bound    pvc-1af5b492-0336-42fd-afe2-ae684193d58f   5Gi        RWO            standard       <unset>                 96m
+persistentvolumeclaim/ragops-data            Bound    pvc-1308e833-1747-4741-8ad5-22a748d1ba6b   10Gi       RWO            standard       <unset>                 96m
+persistentvolumeclaim/redis-data             Bound    pvc-9829f3fe-7531-4e56-a69b-178135ab8591   1Gi        RWO            standard       <unset>                 96m
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      96m
+configmap/ragops-gates       1      96m
+configmap/rahbar-config      22     96m

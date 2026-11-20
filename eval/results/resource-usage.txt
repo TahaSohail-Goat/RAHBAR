@@ -1,0 +1,8 @@
+NAME                             CPU(cores)   MEMORY(bytes)   
+api-54dcdbfbbb-2kt6k             6m           443Mi           
+api-54dcdbfbbb-krvrw             7m           448Mi           
+api-54dcdbfbbb-kvpq5             5m           438Mi           
+api-candidate-7799dbbb46-msnmv   5m           369Mi           
+chroma-0                         2m           2042Mi          
+redis-77dc66677-x4zkk            4m           3Mi             
+ui-5cb48568f6-lnslx              1m           2Mi             
