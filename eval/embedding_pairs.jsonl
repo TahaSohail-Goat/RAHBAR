@@ -1,0 +1,30 @@
+{"kind": "paraphrase", "left": "When does the current academic year start and finish?", "right": "Which months begin and end the academic year?"}
+{"kind": "paraphrase", "left": "How many minutes does one classroom period last?", "right": "What is the length of a teaching period in minutes?"}
+{"kind": "paraphrase", "left": "What CGPA is needed to stay off academic warning?", "right": "Which undergraduate GPA threshold avoids a warning?"}
+{"kind": "paraphrase", "left": "What meaning is assigned to grades A and A minus?", "right": "How are A and A- interpreted in the grade table?"}
+{"kind": "paraphrase", "left": "How many credits does a lab or workshop normally carry?", "right": "What is the usual credit-hour load for lab courses?"}
+{"kind": "paraphrase", "left": "May AI tools be the sole source for preparatory research?", "right": "Can a student rely only on generative AI when preparing research?"}
+{"kind": "paraphrase", "left": "What portion of absence may the HoD excuse for a genuine reason?", "right": "How much course absence can the department head condone?"}
+{"kind": "paraphrase", "left": "How many weeks long is the current summer semester?", "right": "What is the duration of today's undergraduate summer term?"}
+{"kind": "paraphrase", "left": "What penalty applies if attendance is below the rule?", "right": "What follows when a student misses the attendance requirement?"}
+{"kind": "paraphrase", "left": "What is the minimum time to complete a bachelor's degree?", "right": "How many years are required for a bachelor's program at minimum?"}
+{"kind": "paraphrase", "left": "What attendance is required in an undergraduate course?", "right": "What percentage must undergraduates attend?"}
+{"kind": "paraphrase", "left": "How long was the optional summer term in the 2023 rules?", "right": "What duration did the August 2023 rules give for summer semester?"}
+{"kind": "paraphrase", "left": "What journal evidence is needed for the faculty startup policy?", "right": "Which publication must a faculty startup applicant show?"}
+{"kind": "paraphrase", "left": "What time range is considered for journal publication evidence?", "right": "How far back must the qualifying publication be?"}
+{"kind": "paraphrase", "left": "Which policy describes acceptable generative AI uses?", "right": "Where does the student handbook explain permitted AI use?"}
+{"kind": "unrelated", "left": "When does the current academic year start and finish?", "right": "How do I renew a passport at the embassy?"}
+{"kind": "unrelated", "left": "How many minutes does one classroom period last?", "right": "What is the weather forecast for Islamabad tomorrow?"}
+{"kind": "unrelated", "left": "What CGPA is needed to stay off academic warning?", "right": "Which stock has the highest market capitalization?"}
+{"kind": "unrelated", "left": "What meaning is assigned to grades A and A minus?", "right": "How do I prepare chicken biryani at home?"}
+{"kind": "unrelated", "left": "How many credits does a lab or workshop normally carry?", "right": "What is the current exchange rate for euros?"}
+{"kind": "unrelated", "left": "May AI tools be the sole source for preparatory research?", "right": "Who won the latest international cricket final?"}
+{"kind": "unrelated", "left": "What portion of absence may the HoD excuse for a genuine reason?", "right": "How do I replace a damaged car tire?"}
+{"kind": "unrelated", "left": "How many weeks long is the current summer semester?", "right": "Which mountain is tallest in South America?"}
+{"kind": "unrelated", "left": "What penalty applies if attendance is below the rule?", "right": "How can I train a puppy to sit?"}
+{"kind": "unrelated", "left": "What is the minimum time to complete a bachelor's degree?", "right": "What causes thunderstorms in tropical regions?"}
+{"kind": "unrelated", "left": "What attendance is required in an undergraduate course?", "right": "How much water should a houseplant receive?"}
+{"kind": "unrelated", "left": "How long was the optional summer term in the 2023 rules?", "right": "What are the opening hours of the national museum?"}
+{"kind": "unrelated", "left": "What journal evidence is needed for the faculty startup policy?", "right": "How does a solar panel generate electricity?"}
+{"kind": "unrelated", "left": "What time range is considered for journal publication evidence?", "right": "Which recipe uses fresh basil and tomatoes?"}
+{"kind": "unrelated", "left": "Which policy describes acceptable generative AI uses?", "right": "Where can I buy a replacement phone battery?"}
