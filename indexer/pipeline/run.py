@@ -81,11 +81,13 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
     return found
 
 
-def prepare(corpus_dir: str) -> list[Document]:
+def prepare(corpus_dir: str, *, allowed_sources: set[str] | None = None) -> list[Document]:
     from .clean import clean
     from .extract import extract
 
     sources = discover(corpus_dir)
+    if allowed_sources is not None:
+        sources = [item for item in sources if item[0].name in allowed_sources]
     if not sources:
         raise ValueError(f"no documents found in {corpus_dir}")
     documents = []

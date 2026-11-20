@@ -1,3 +1,6 @@
+import json
+from types import SimpleNamespace
+
 from eval.assignment3.coverage import compare
 from eval.assignment3.gate import gate
 
@@ -42,6 +45,25 @@ def test_gate_coverage_is_post_expansion_metric() -> None:
                  "query_coverage": 0.9, "query_coverage_before_six": 0.67}
 
     assert gate(candidate, baseline, thresholds) == []
+
+
+def test_module_metrics_allow_list_comes_from_latest_verification(tmp_path, monkeypatch) -> None:
+    from eval.assignment3.corpus import verified_corpus_sources
+
+    report_dir = tmp_path / "reports"
+    report_dir.mkdir()
+    (report_dir / "verification-20261120T010000Z.json").write_text(
+        json.dumps({"documents": [{"source": "old.md", "quarantined": False}]}),
+        encoding="utf-8")
+    (report_dir / "verification-20261120T020000Z.json").write_text(
+        json.dumps({"documents": [{"source": "good.md", "quarantined": False},
+                                   {"source": "bad.pdf", "quarantined": True}]}),
+        encoding="utf-8")
+    monkeypatch.setenv("RAGOPS_DATA_DIR", str(tmp_path))
+
+    sources = verified_corpus_sources(SimpleNamespace(corpus_dir="unused"))
+
+    assert sources == {"good.md"}
 
 
 def test_gate_requires_human_faithfulness_labels_and_enforces_quality() -> None:

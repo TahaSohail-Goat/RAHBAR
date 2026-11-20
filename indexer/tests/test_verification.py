@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from pipeline.models import Document, Page
+from pipeline.run import prepare
 from pipeline.verification import EmbeddingLedger, verify_documents
 
 
@@ -74,3 +75,14 @@ def test_unreadable_old_version_is_quarantined_without_breaking_version_checks(
     assert [document.source for document in valid] == ["policy-2027.md"]
     assert rows["policy-2027.md"]["archived"] is False
     assert rows["policy-2026.pdf"]["quarantined"] is True
+
+
+def test_prepare_uses_verifier_allow_list_before_extracting_sources(tmp_path: Path) -> None:
+    good = tmp_path / "good.md"
+    good.write_text("---\nname: Good\ndoc_version: 2026\npages: 1\n---\n\nReadable text.",
+                    encoding="utf-8")
+    (tmp_path / "quarantined.pdf").write_bytes(b"corrupt PDF")
+
+    documents = prepare(str(tmp_path), allowed_sources={"good.md"})
+
+    assert [document.source for document in documents] == ["good.md"]
