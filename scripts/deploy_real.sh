@@ -3,6 +3,7 @@
 set -euo pipefail
 PYTHON=${PYTHON:-python3}
 TAG=${TAG:-dev}
+MINIKUBE_PROFILE=${MINIKUBE_PROFILE:-minikube}
 OLLAMA_URL=${OLLAMA_URL:-http://host.minikube.internal:11434}
 command -v docker >/dev/null
 command -v minikube >/dev/null
@@ -19,11 +20,26 @@ FROM rahbar-indexer:corpus-base
 COPY --chown=10001:10001 *.pdf _index.json /corpus/
 DOCKERFILE
 for image in "rahbar-api:$TAG" "rahbar-ui:$TAG" "rahbar-indexer:$TAG"; do
-  minikube image load --overwrite=true "$image"
+  minikube -p "$MINIKUBE_PROFILE" image load --overwrite=true "$image"
 done
 ollama_host=$(OLLAMA_URL="$OLLAMA_URL" "$PYTHON" -c 'import os,urllib.parse; print(urllib.parse.urlsplit(os.environ["OLLAMA_URL"]).hostname)')
-ollama_ip=${OLLAMA_IP:-$(minikube ssh -- "getent ahostsv4 '$ollama_host' | head -n 1 | cut -d ' ' -f 1" | tr -d '\r')}
+ollama_ip=${OLLAMA_IP:-$(minikube -p "$MINIKUBE_PROFILE" ssh -- "getent ahostsv4 '$ollama_host' | head -n 1 | cut -d ' ' -f 1" | tr -d '\r')}
 [[ -n "$ollama_ip" ]] || { echo 'Set OLLAMA_IP to the IPv4 address reachable inside Minikube.' >&2; exit 1; }
+if ! minikube -p "$MINIKUBE_PROFILE" ssh -- curl -fsS --max-time 5 \
+    "${OLLAMA_URL%/}/api/tags" >/dev/null 2>&1; then
+  # In WSL2, the Windows host is the default gateway visible to the Linux VM.
+  # host.minikube.internal can resolve to the Minikube bridge instead, which
+  # is not necessarily an address owned by Windows.
+  windows_gateway=$(ip -4 route show default | awk 'NR == 1 {print $3}')
+  if [[ -n "$windows_gateway" ]] && minikube -p "$MINIKUBE_PROFILE" ssh -- \
+      curl -fsS --max-time 5 "http://${windows_gateway}:11434/api/tags" >/dev/null 2>&1; then
+    OLLAMA_URL="http://${windows_gateway}:11434"
+    ollama_ip=$windows_gateway
+  else
+    echo "Ollama is not reachable at $OLLAMA_URL from Minikube." >&2
+    exit 1
+  fi
+fi
 mkdir -p output/deployment
 kubectl kustomize k8s/overlays/prod | "$PYTHON" scripts/configure_deployment.py \
   --ollama-url "$OLLAMA_URL" --ollama-cidr "$ollama_ip/32" \
@@ -33,7 +49,22 @@ kubectl kustomize k8s/overlays/prod | "$PYTHON" scripts/configure_deployment.py 
 kubectl apply -f k8s/base/namespace.yaml
 kubectl -n rahbar delete job initial-index --ignore-not-found
 kubectl apply -f output/deployment/prod.yaml
-kubectl -n rahbar wait --for=condition=complete job/initial-index --timeout=1500s
+deadline=$((SECONDS + 1500))
+while ! kubectl -n rahbar wait --for=condition=complete job/initial-index --timeout=5s \
+    >/dev/null 2>&1; do
+  failed=$(kubectl -n rahbar get job initial-index \
+    -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}')
+  if [[ "$failed" == "True" ]]; then
+    kubectl -n rahbar logs job/initial-index --all-containers=true || true
+    kubectl -n rahbar describe job initial-index || true
+    exit 1
+  fi
+  if (( SECONDS >= deadline )); then
+    echo 'Timed out waiting for the initial index job.' >&2
+    kubectl -n rahbar logs job/initial-index --all-containers=true || true
+    exit 1
+  fi
+done
 kubectl -n rahbar rollout restart deployment/api
 kubectl -n rahbar rollout status deployment/api --timeout=300s
 kubectl -n rahbar get pods,svc,ingress,hpa

@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ragops-eval
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: ragops-eval}
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
+      volumes:
+        - name: ragops-data
+          persistentVolumeClaim: {claimName: ragops-data}
+        - name: thresholds
+          configMap: {name: ragops-gates}
+        - name: tmp
+          emptyDir: {sizeLimit: 128Mi}
+      containers:
+        - name: eval
+          image: rahbar-eval:dev
+          imagePullPolicy: IfNotPresent
+          command: [sh, -ec]
+          args:
+            - >-
+              mkdir -p /var/lib/rahbar/results /var/lib/rahbar/reviews;
+              python -m eval.assignment3.runner --collection "$CHROMA_COLLECTION"
+              --out "/var/lib/rahbar/results/run-$(date -u +%Y%m%dT%H%M%S%NZ).json";
+              latest=$(ls -1t /var/lib/rahbar/results/run-*.json | head -n 1);
+              python -m eval.assignment3.gate --candidate "$latest"
+              --baseline /var/lib/rahbar/results/baseline.json
+              --thresholds /etc/rahbar/gates/gate.yaml
+              --out /var/lib/rahbar/results/gate-latest.json
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          env:
+            - {name: CHROMA_COLLECTION, value: rahbar-candidate}
+            - {name: CORPUS_DIR, value: /var/lib/rahbar/lake}
+            - {name: RAGOPS_DATA_DIR, value: /var/lib/rahbar}
+          volumeMounts:
+            - {name: ragops-data, mountPath: /var/lib/rahbar}
+            - {name: thresholds, mountPath: /etc/rahbar/gates, readOnly: true}
+            - {name: tmp, mountPath: /tmp}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 500m, memory: 1Gi}
+            limits: {cpu: "2", memory: 3Gi}

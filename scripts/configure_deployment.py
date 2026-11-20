@@ -27,7 +27,9 @@ def main():
         kind, name = obj["kind"], obj["metadata"]["name"]
         if kind == "ConfigMap" and name == "rahbar-config":
             obj["data"]["OLLAMA_URL"] = args.ollama_url
-        if kind == "NetworkPolicy" and name in {"allow-api", "allow-indexer"}:
+        if kind == "NetworkPolicy" and name in {
+            "allow-api", "allow-indexer", "allow-api-candidate", "allow-ragops-egress"
+        }:
             for rule in obj["spec"].get("egress", []):
                 for peer in rule.get("to", []):
                     if "ipBlock" in peer:

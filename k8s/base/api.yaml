@@ -17,13 +17,18 @@ spec:
       enableServiceLinks: false
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 35
-      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001}
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
+      volumes:
+        - name: ragops-data
+          persistentVolumeClaim: {claimName: ragops-data}
       containers:
         - name: api
           image: rahbar-api:dev
           imagePullPolicy: IfNotPresent
           ports:
             - {name: http, containerPort: 8000}
+          volumeMounts:
+            - {name: ragops-data, mountPath: /var/lib/rahbar}
           envFrom:
             - configMapRef: {name: rahbar-config}
           env:
