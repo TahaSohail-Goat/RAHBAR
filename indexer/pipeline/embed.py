@@ -25,7 +25,7 @@ def embed(texts: list[str], settings: IndexerSettings,
             batch = texts[start:start + _BATCH_SIZE]
             try:
                 response = client.post(url, json={
-                    "model": settings.embed_model, "input": batch, "truncate": False,
+                    "model": settings.embed_model, "input": batch, "truncate": True,
                 })
                 response.raise_for_status()
                 payload = response.json()
@@ -46,6 +46,11 @@ def embed(texts: list[str], settings: IndexerSettings,
                            for value in vector) or not any(vector):
                         raise ValueError("embedding is non-numeric, non-finite or zero")
                     vectors.append([float(value) for value in vector])
+            except httpx.HTTPStatusError as exc:
+                detail = exc.response.text[:500]
+                raise ValueError(
+                    f"Ollama embedding batch starting at chunk {start}: {exc}; response={detail}"
+                ) from exc
             except (httpx.HTTPError, ValueError, OverflowError) as exc:
                 raise ValueError(f"Ollama embedding batch starting at chunk {start}: {exc}") from exc
     return vectors

@@ -1,6 +1,9 @@
 ---
 source: academic-rules-2026.md
+name: Margalla Institute Academic Rules
 doc_version: 2026
+pages: 1
+logical_id: academic-rules
 superseded: false
 ---
 # Margalla Institute of Technology: Academic Rules (2026 edition)

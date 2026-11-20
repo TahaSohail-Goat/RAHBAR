@@ -23,7 +23,7 @@ def test_embeddings_use_ordered_batches_and_model_pin(monkeypatch: pytest.Monkey
         assert request.url.path == "/api/embed"
         payload = json.loads(request.content)
         assert payload["model"] == "test-model"
-        assert payload["truncate"] is False
+        assert payload["truncate"] is True
         calls.append(payload["input"])
         return httpx.Response(200, json={"embeddings": [[int(t), 1] for t in calls[-1]]})
 
