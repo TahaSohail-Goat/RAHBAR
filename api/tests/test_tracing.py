@@ -1,5 +1,4 @@
 import json
-from types import SimpleNamespace
 
 from app.schemas import AskResponse
 from app.tracing import finalize_trace, trace_context
