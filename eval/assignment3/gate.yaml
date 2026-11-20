@@ -1,0 +1,8 @@
+# Gate thresholds are read at runtime by both local and Kubernetes evaluation Jobs.
+max_recall5_drop: 0.02
+min_faithfulness: 0.80
+min_human_faithfulness_labels: 8
+min_citation_validity: 0.95
+max_latency_p95_ms: 15000
+min_abstention_correctness: 1.0
+min_query_coverage: 0.85

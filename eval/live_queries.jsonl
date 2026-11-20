@@ -1,0 +1,40 @@
+{"id": "in-01", "domain": "in", "question": "When does the current academic year begin?"}
+{"id": "in-02", "domain": "in", "question": "How long is a classroom teaching period?"}
+{"id": "in-03", "domain": "in", "question": "What CGPA avoids an academic warning?"}
+{"id": "in-04", "domain": "in", "question": "What does an A grade mean?"}
+{"id": "in-05", "domain": "in", "question": "How many credit hours does a lab usually carry?"}
+{"id": "in-06", "domain": "in", "question": "May students use generative AI for research?"}
+{"id": "in-07", "domain": "in", "question": "How much absence can the HoD condone?"}
+{"id": "in-08", "domain": "in", "question": "How long is the summer semester now?"}
+{"id": "in-09", "domain": "in", "question": "What does clause 1.22 say about attendance?"}
+{"id": "in-10", "domain": "in", "question": "How long is a bachelor's degree?"}
+{"id": "in-11", "domain": "in", "question": "What attendance rule applies to undergraduates?"}
+{"id": "in-12", "domain": "in", "question": "What did the 2023 rules say about summer?"}
+{"id": "in-13", "domain": "in", "question": "What is the faculty startup journal requirement?"}
+{"id": "in-14", "domain": "in", "question": "How many years of publications are considered?"}
+{"id": "in-15", "domain": "in", "question": "What does the university annual report cover?"}
+{"id": "in-16", "domain": "in", "question": "What is the prospectus academic rules summary?"}
+{"id": "in-17", "domain": "in", "question": "What are acceptable uses of generative AI tools?"}
+{"id": "in-18", "domain": "in", "question": "Which section defines academic warning?"}
+{"id": "in-19", "domain": "in", "question": "When does the academic year end?"}
+{"id": "in-20", "domain": "in", "question": "What consequence follows missed attendance?"}
+{"id": "in-21", "domain": "in", "question": "How many semesters are in a bachelor's degree?"}
+{"id": "in-22", "domain": "in", "question": "What does the current handbook say about CGPA?"}
+{"id": "in-23", "domain": "in", "question": "How long is a classroom period in minutes?"}
+{"id": "in-24", "domain": "in", "question": "What is the grade interpretation for A minus?"}
+{"id": "in-25", "domain": "in", "question": "What are the academic-year start and end months?"}
+{"id": "in-26", "domain": "in", "question": "What does the ORIC startup policy require?"}
+{"id": "in-27", "domain": "in", "question": "What is the student's attendance requirement?"}
+{"id": "in-28", "domain": "in", "question": "What is the university policy on AI?"}
+{"id": "out-01", "domain": "out", "question": "What is today's weather in Islamabad?"}
+{"id": "out-02", "domain": "out", "question": "Who won yesterday's cricket match?"}
+{"id": "out-03", "domain": "out", "question": "What is the hostel visitor curfew?"}
+{"id": "out-04", "domain": "out", "question": "How much is the room-key deposit?"}
+{"id": "out-05", "domain": "out", "question": "What is the current semester tuition fee?"}
+{"id": "out-06", "domain": "out", "question": "When is the next convocation ceremony?"}
+{"id": "out-07", "domain": "out", "question": "Which bus route serves my home address?"}
+{"id": "out-08", "domain": "out", "question": "What is the cafeteria menu today?"}
+{"id": "out-09", "domain": "out", "question": "How do I renew my passport?"}
+{"id": "out-10", "domain": "out", "question": "What is the exchange rate this morning?"}
+{"id": "out-11", "domain": "out", "question": "Which hospital is nearest to campus?"}
+{"id": "out-12", "domain": "out", "question": "What are today's stock market prices?"}
