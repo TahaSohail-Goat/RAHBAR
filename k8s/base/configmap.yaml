@@ -19,7 +19,9 @@ data:
   CACHE_THRESHOLD: "0.95"
   CACHE_TTL_SECONDS: "86400"
   TEMPERATURE: "0.2" # Low variance for policy facts and schema output; not a truth guarantee.
+  LLM_SEED: "42"
   LOG_LEVEL: INFO
-  CORPUS_DIR: /corpus
+  CORPUS_DIR: /var/lib/rahbar/lake
+  RAGOPS_DATA_DIR: /var/lib/rahbar
   CHUNK_SIZE: "400"
   CHUNK_OVERLAP: "50"

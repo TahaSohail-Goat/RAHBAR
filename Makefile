@@ -3,16 +3,18 @@
 SHELL := /bin/bash
 NS ?= rahbar
 TAG ?= dev
+PROFILE ?= minikube
 PY ?= python3
 VENV ?= .venv
 BIN := $(abspath $(VENV))/bin
+REPORT_LIBS ?= /mnt/d/SCD-Tools/assignment3-report-libs
 # The Ingress address. On Linux this is the minikube IP. On macOS or Windows with the
 # docker driver, run `minikube tunnel` in another terminal and use INGRESS_IP=127.0.0.1.
-INGRESS_IP ?= $(shell minikube ip 2>/dev/null)
+INGRESS_IP ?= $(shell minikube -p $(PROFILE) ip 2>/dev/null)
 HOST ?= rahbar.local
 
 .DEFAULT_GOAL := help
-.PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check deploy-real audit-live calibrate-cache evidence rollout-demo
+.PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check deploy-real audit-live calibrate-cache evidence rollout-demo ragops-data ragops-image ragops-suite ragops-coverage ragops-traces ragops-gate ragops-batch-b ragops-candidate ragops-baseline-job ragops-eval-job ragops-report
 
 help: ## list the targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-14s %s\n", $$1, $$2}'
@@ -36,17 +38,17 @@ dev: ## run the API with stubs on http://localhost:8000, serving the chat UI too
 	cd api && SERVE_UI_DIR=../ui RETRIEVER=stub LLM_PROVIDER=stub "$(BIN)/uvicorn" app.main:app --reload --port 8000
 
 cluster: ## start minikube with Calico, then enable metrics-server and ingress
-	minikube start --driver=docker --cni=calico --memory=6144 --cpus=4
-	minikube addons enable metrics-server
-	minikube addons enable ingress
+	minikube start -p $(PROFILE) --driver=docker --cni=calico --memory=6144 --cpus=4
+	minikube -p $(PROFILE) addons enable metrics-server
+	minikube -p $(PROFILE) addons enable ingress
 
 images: ## build corpus-free images and load them into minikube
 	docker build --build-arg VCS_REF=$$(git rev-parse HEAD) -t rahbar-api:$(TAG) api
 	docker build --build-arg VCS_REF=$$(git rev-parse HEAD) -t rahbar-indexer:$(TAG) indexer
 	docker build --build-arg VCS_REF=$$(git rev-parse HEAD) -t rahbar-ui:$(TAG) ui
-	minikube image load rahbar-api:$(TAG)
-	minikube image load rahbar-indexer:$(TAG)
-	minikube image load rahbar-ui:$(TAG)
+	minikube -p $(PROFILE) image load rahbar-api:$(TAG)
+	minikube -p $(PROFILE) image load rahbar-indexer:$(TAG)
+	minikube -p $(PROFILE) image load rahbar-ui:$(TAG)
 
 apply: ## apply the explicitly stubbed dev overlay
 	kubectl apply -k k8s/overlays/dev
@@ -78,7 +80,7 @@ check: ## run the submission checker
 	$(PY) scripts/check_submission.py
 
 deploy-real: ## fetch pinned PDFs, resolve host egress, build corpus image, and deploy prod
-	PYTHON="$(BIN)/python" TAG="$(TAG)" bash scripts/deploy_real.sh
+	PYTHON="$(BIN)/python" TAG="$(TAG)" MINIKUBE_PROFILE="$(PROFILE)" bash scripts/deploy_real.sh
 
 audit-live: ## measure three chunk settings and cache thresholds against real local services
 	"$(BIN)/python" -m eval.live_audit --out eval/runs/current
@@ -91,3 +93,38 @@ evidence: ## capture real cluster/resource evidence (run while the index Job is 
 
 rollout-demo: ## perform a visible UI update and rollback, then restore the original image
 	INGRESS_IP="$(INGRESS_IP)" HOST="$(HOST)" bash scripts/rollout_demo.sh
+
+ragops-data: ## generate the Assignment 3 golden/live/embedding datasets
+	"$(BIN)/python" eval/assignment3/prepare_dataset.py
+
+ragops-image: ## build the live evaluation image
+	docker build -f eval/Dockerfile.ragops -t rahbar-eval:$(TAG) .
+	minikube -p $(PROFILE) image load rahbar-eval:$(TAG)
+
+ragops-suite: ## run all three evaluation levels twice and save a timestamped JSON report
+	"$(BIN)/python" -m eval.assignment3.runner
+
+ragops-coverage: ## measure 40-query golden coverage before/after the six new questions
+	"$(BIN)/python" -m eval.assignment3.coverage
+
+ragops-traces: ## summarize durable query traces for an optional time window
+	"$(BIN)/python" -m eval.assignment3.trace_summary $(if $(SINCE),--since "$(SINCE)") $(if $(UNTIL),--until "$(UNTIL)")
+
+ragops-gate: ## compare CANDIDATE and BASELINE result JSON using runtime thresholds
+	@test -f "$(CANDIDATE)" -a -f "$(BASELINE)" || { echo 'set CANDIDATE and BASELINE to result JSON paths'; exit 2; }
+	"$(BIN)/python" -m eval.assignment3.gate --candidate "$(CANDIDATE)" --baseline "$(BASELINE)"
+
+ragops-batch-b: ## run the planted Batch B ingestion Job in Kubernetes
+	kubectl apply -f k8s/assignment3/batch-b-job.yaml
+
+ragops-candidate: ## publish and deploy the alternate chunk-size collection/API
+	kubectl apply -f k8s/assignment3/candidate.yaml
+
+ragops-baseline-job: ## capture the fixed-pipeline live baseline on rahbar
+	kubectl apply -f k8s/assignment3/baseline-job.yaml
+
+ragops-eval-job: ## launch the persistent-volume evaluation and release-gate Job
+	kubectl apply -f k8s/assignment3/eval-job.yaml
+
+ragops-report: ## render the six-page report and screenshot appendix from measured evidence
+	PYTHONPATH="$(REPORT_LIBS):$${PYTHONPATH:-}" "$(BIN)/python" docs/assignment3/build_report.py

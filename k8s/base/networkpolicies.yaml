@@ -111,6 +111,10 @@ spec:
             matchLabels: {app: api}
         - podSelector:
             matchLabels: {app: indexer}
+        - podSelector:
+            matchLabels: {app: api-candidate}
+        - podSelector:
+            matchLabels: {app: ragops-eval}
       ports:
         - {protocol: TCP, port: 8000}
 ---
@@ -128,5 +132,79 @@ spec:
             matchLabels: {app: api}
         - podSelector:
             matchLabels: {app: indexer}
+        - podSelector:
+            matchLabels: {app: api-candidate}
+        - podSelector:
+            matchLabels: {app: ragops-eval}
       ports:
         - {protocol: TCP, port: 6379}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ragops-egress
+spec:
+  podSelector:
+    matchLabels: {app: ragops-eval}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {app: chroma}
+      ports:
+        - {protocol: TCP, port: 8000}
+    - to:
+        - podSelector:
+            matchLabels: {app: redis}
+      ports:
+        - {protocol: TCP, port: 6379}
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+          podSelector:
+            matchLabels: {k8s-app: kube-dns}
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+    - to:
+        - ipBlock: {cidr: 192.168.49.1/32}
+      ports:
+        - {protocol: TCP, port: 11434}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-candidate
+spec:
+  podSelector:
+    matchLabels: {app: api-candidate}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {app: ragops-eval}
+      ports:
+        - {protocol: TCP, port: 8000}
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {app: chroma}
+      ports:
+        - {protocol: TCP, port: 8000}
+    - to:
+        - podSelector:
+            matchLabels: {app: redis}
+      ports:
+        - {protocol: TCP, port: 6379}
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+          podSelector:
+            matchLabels: {k8s-app: kube-dns}
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+    - to:
+        - ipBlock: {cidr: 192.168.49.1/32}
+      ports:
+        - {protocol: TCP, port: 11434}

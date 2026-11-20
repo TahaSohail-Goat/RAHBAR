@@ -4,6 +4,8 @@ namespace: rahbar
 resources:
   - namespace.yaml
   - configmap.yaml
+  - ragops-configmap.yaml
+  - ragops-data.yaml
   - serviceaccounts.yaml
   - chroma.yaml
   - redis.yaml

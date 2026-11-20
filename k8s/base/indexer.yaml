@@ -13,10 +13,12 @@ spec:
       enableServiceLinks: false
       automountServiceAccountToken: false
       restartPolicy: OnFailure
-      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001}
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
       volumes:
         - name: ocr-tmp
           emptyDir: {sizeLimit: 128Mi}
+        - name: ragops-data
+          persistentVolumeClaim: {claimName: ragops-data}
       initContainers:
         - name: wait-for-data
           image: busybox:1.37.0
@@ -34,9 +36,10 @@ spec:
         - name: indexer
           image: rahbar-indexer:dev
           imagePullPolicy: IfNotPresent
-          command: [python, -m, pipeline.run]
+          command: [sh, -ec, "mkdir -p /var/lib/rahbar/lake && cp -an /corpus/. /var/lib/rahbar/lake/ && exec python -m pipeline.run"]
           volumeMounts:
             - {name: ocr-tmp, mountPath: /tmp}
+            - {name: ragops-data, mountPath: /var/lib/rahbar}
           envFrom:
             - configMapRef: {name: rahbar-config}
           securityContext:
@@ -67,10 +70,12 @@ spec:
           enableServiceLinks: false
           automountServiceAccountToken: false
           restartPolicy: OnFailure
-          securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001}
+          securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
           volumes:
             - name: ocr-tmp
               emptyDir: {sizeLimit: 128Mi}
+            - name: ragops-data
+              persistentVolumeClaim: {claimName: ragops-data}
           initContainers:
             - name: wait-for-data
               image: busybox:1.37.0
@@ -88,9 +93,10 @@ spec:
             - name: indexer
               image: rahbar-indexer:dev
               imagePullPolicy: IfNotPresent
-              command: [python, -m, pipeline.run]
+              command: [sh, -ec, "mkdir -p /var/lib/rahbar/lake && cp -an /corpus/. /var/lib/rahbar/lake/ && exec python -m pipeline.run"]
               volumeMounts:
                 - {name: ocr-tmp, mountPath: /tmp}
+                - {name: ragops-data, mountPath: /var/lib/rahbar}
               envFrom:
                 - configMapRef: {name: rahbar-config}
               securityContext:
