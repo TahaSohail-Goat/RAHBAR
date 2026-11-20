@@ -1,0 +1,17 @@
+{
+  "candidate": "/var/lib/rahbar/results/run-20261120T232754873941631Z.json",
+  "baseline": "/var/lib/rahbar/results/baseline.json",
+  "thresholds": {
+    "max_recall5_drop": 0.02,
+    "min_faithfulness": 0.8,
+    "min_human_faithfulness_labels": 8,
+    "min_citation_validity": 0.95,
+    "max_latency_p95_ms": 15000,
+    "min_abstention_correctness": 1.0,
+    "min_query_coverage": 0.85
+  },
+  "decision": "reject",
+  "failures": [
+    "faithfulness needs at least 8 human labels; got 0"
+  ]
+}

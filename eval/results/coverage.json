@@ -1,0 +1,298 @@
+{
+  "threshold": 0.72,
+  "justification": "The assignment includes deliberately out-of-domain queries; the release gate measures coverage among 28 in-scope queries and reports out-of-scope similarity separately because unsupported questions should be abstained on.",
+  "before": {
+    "threshold": 0.72,
+    "total": 40,
+    "covered": 23,
+    "uncovered": [
+      {
+        "id": "in-04",
+        "question": "What does an A grade mean?",
+        "domain": "in",
+        "closest_golden": "In the undergraduate letter-grade interpretation table, which interpretation corresponds to A and A-?",
+        "similarity": 0.70847,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-14",
+        "question": "How many years of publications are considered?",
+        "domain": "in",
+        "closest_golden": "Under the technical start-up policy, what journal-publication evidence must a faculty applicant have from the two years before applying?",
+        "similarity": 0.64404,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-15",
+        "question": "What does the university annual report cover?",
+        "domain": "in",
+        "closest_golden": "Which months bound the current undergraduate academic year?",
+        "similarity": 0.57354,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-16",
+        "question": "What is the prospectus academic rules summary?",
+        "domain": "in",
+        "closest_golden": "In the current undergraduate academic rules, when does the academic year start and end?",
+        "similarity": 0.56692,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-18",
+        "question": "Which section defines academic warning?",
+        "domain": "in",
+        "closest_golden": "What minimum CGPA avoids academic warning in an undergraduate programme?",
+        "similarity": 0.66693,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-22",
+        "question": "What does the current handbook say about CGPA?",
+        "domain": "in",
+        "closest_golden": "What minimum CGPA avoids academic warning in an undergraduate programme?",
+        "similarity": 0.67458,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-24",
+        "question": "What is the grade interpretation for A minus?",
+        "domain": "in",
+        "closest_golden": "In the undergraduate letter-grade interpretation table, which interpretation corresponds to A and A-?",
+        "similarity": 0.70864,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-26",
+        "question": "What does the ORIC startup policy require?",
+        "domain": "in",
+        "closest_golden": "Under the technical start-up policy, what journal-publication evidence must a faculty applicant have from the two years before applying?",
+        "similarity": 0.55674,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-28",
+        "question": "What is the university policy on AI?",
+        "domain": "in",
+        "closest_golden": "According to the student handbook, may generative AI be a student's only source for preparatory research?",
+        "similarity": 0.64703,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "out-01",
+        "question": "What is today's weather in Islamabad?",
+        "domain": "out",
+        "closest_golden": "What is the exact overnight guest curfew for residents of the FAST Islamabad hostel?",
+        "similarity": 0.61436,
+        "topic": "calendar"
+      },
+      {
+        "id": "out-02",
+        "question": "Who won yesterday's cricket match?",
+        "domain": "out",
+        "closest_golden": "Which bus route serves a student's home address in Rawalpindi?",
+        "similarity": 0.48662,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "out-05",
+        "question": "What is the current semester tuition fee?",
+        "domain": "out",
+        "closest_golden": "Under the current undergraduate rules, how long is the summer semester?",
+        "similarity": 0.66417,
+        "topic": "fees"
+      },
+      {
+        "id": "out-08",
+        "question": "What is the cafeteria menu today?",
+        "domain": "out",
+        "closest_golden": "What is the duration in minutes of one classroom teaching period under the current undergraduate rules?",
+        "similarity": 0.50208,
+        "topic": "campus_services"
+      },
+      {
+        "id": "out-09",
+        "question": "How do I renew my passport?",
+        "domain": "out",
+        "closest_golden": "What is the 2026 hostel key deposit for FAST Islamabad?",
+        "similarity": 0.46915,
+        "topic": "health_travel"
+      },
+      {
+        "id": "out-10",
+        "question": "What is the exchange rate this morning?",
+        "domain": "out",
+        "closest_golden": "What is the 2026 hostel key deposit for FAST Islamabad?",
+        "similarity": 0.52122,
+        "topic": "finance"
+      },
+      {
+        "id": "out-11",
+        "question": "Which hospital is nearest to campus?",
+        "domain": "out",
+        "closest_golden": "Which bus route serves a student's home address in Rawalpindi?",
+        "similarity": 0.54815,
+        "topic": "health_travel"
+      },
+      {
+        "id": "out-12",
+        "question": "What are today's stock market prices?",
+        "domain": "out",
+        "closest_golden": "What is the normal credit-hour assignment for a lab or workshop?",
+        "similarity": 0.44379,
+        "topic": "finance"
+      }
+    ],
+    "coverage": 0.575,
+    "by_domain": {
+      "in": {
+        "total": 28,
+        "covered": 19,
+        "coverage": 0.6785714285714286
+      },
+      "out": {
+        "total": 12,
+        "covered": 4,
+        "coverage": 0.3333333333333333
+      }
+    },
+    "in_scope_total": 28,
+    "in_scope_covered": 19,
+    "in_scope_coverage": 0.6785714285714286,
+    "out_of_scope_total": 12,
+    "out_of_scope_covered": 4,
+    "out_of_scope_similarity_coverage": 0.3333333333333333,
+    "uncovered_topics": {
+      "academic_policy": 10,
+      "calendar": 1,
+      "fees": 1,
+      "campus_services": 1,
+      "health_travel": 2,
+      "finance": 2
+    }
+  },
+  "after": {
+    "threshold": 0.72,
+    "total": 40,
+    "covered": 29,
+    "uncovered": [
+      {
+        "id": "in-16",
+        "question": "What is the prospectus academic rules summary?",
+        "domain": "in",
+        "closest_golden": "Which section defines academic warning?",
+        "similarity": 0.63894,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-26",
+        "question": "What does the ORIC startup policy require?",
+        "domain": "in",
+        "closest_golden": "Under the technical start-up policy, what journal-publication evidence must a faculty applicant have from the two years before applying?",
+        "similarity": 0.55674,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "in-28",
+        "question": "What is the university policy on AI?",
+        "domain": "in",
+        "closest_golden": "According to the student handbook, may generative AI be a student's only source for preparatory research?",
+        "similarity": 0.64703,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "out-01",
+        "question": "What is today's weather in Islamabad?",
+        "domain": "out",
+        "closest_golden": "What is the exact overnight guest curfew for residents of the FAST Islamabad hostel?",
+        "similarity": 0.61436,
+        "topic": "calendar"
+      },
+      {
+        "id": "out-02",
+        "question": "Who won yesterday's cricket match?",
+        "domain": "out",
+        "closest_golden": "Which bus route serves a student's home address in Rawalpindi?",
+        "similarity": 0.48662,
+        "topic": "academic_policy"
+      },
+      {
+        "id": "out-05",
+        "question": "What is the current semester tuition fee?",
+        "domain": "out",
+        "closest_golden": "Under the current undergraduate rules, how long is the summer semester?",
+        "similarity": 0.66417,
+        "topic": "fees"
+      },
+      {
+        "id": "out-08",
+        "question": "What is the cafeteria menu today?",
+        "domain": "out",
+        "closest_golden": "What is the duration in minutes of one classroom teaching period under the current undergraduate rules?",
+        "similarity": 0.50208,
+        "topic": "campus_services"
+      },
+      {
+        "id": "out-09",
+        "question": "How do I renew my passport?",
+        "domain": "out",
+        "closest_golden": "What is the 2026 hostel key deposit for FAST Islamabad?",
+        "similarity": 0.46915,
+        "topic": "health_travel"
+      },
+      {
+        "id": "out-10",
+        "question": "What is the exchange rate this morning?",
+        "domain": "out",
+        "closest_golden": "What is the 2026 hostel key deposit for FAST Islamabad?",
+        "similarity": 0.52122,
+        "topic": "finance"
+      },
+      {
+        "id": "out-11",
+        "question": "Which hospital is nearest to campus?",
+        "domain": "out",
+        "closest_golden": "Which bus route serves a student's home address in Rawalpindi?",
+        "similarity": 0.54815,
+        "topic": "health_travel"
+      },
+      {
+        "id": "out-12",
+        "question": "What are today's stock market prices?",
+        "domain": "out",
+        "closest_golden": "What does the current handbook say about CGPA?",
+        "similarity": 0.44857,
+        "topic": "finance"
+      }
+    ],
+    "coverage": 0.725,
+    "by_domain": {
+      "in": {
+        "total": 28,
+        "covered": 25,
+        "coverage": 0.8928571428571429
+      },
+      "out": {
+        "total": 12,
+        "covered": 4,
+        "coverage": 0.3333333333333333
+      }
+    },
+    "in_scope_total": 28,
+    "in_scope_covered": 25,
+    "in_scope_coverage": 0.8928571428571429,
+    "out_of_scope_total": 12,
+    "out_of_scope_covered": 4,
+    "out_of_scope_similarity_coverage": 0.3333333333333333,
+    "uncovered_topics": {
+      "academic_policy": 4,
+      "calendar": 1,
+      "fees": 1,
+      "campus_services": 1,
+      "health_travel": 2,
+      "finance": 2
+    }
+  },
+  "minimum_coverage": 0.85,
+  "coverage_increased": true
+}

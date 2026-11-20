@@ -1,0 +1,716 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-20T23:15:43.402746+00:00",
+  "checks": [
+    "quality",
+    "completeness",
+    "recency",
+    "uniqueness"
+  ],
+  "near_duplicate_threshold": 0.94,
+  "documents": [
+    {
+      "source": "undergraduate-academic-rules-aug-2023.pdf",
+      "title": "Undergraduate Academic Rules Aug 2023",
+      "doc_version": "2023-08",
+      "page_count": 26,
+      "sha256": "cddfe1f5e9770132e27d686abd1c2e6742ef4732f0c2f431ed514bc1691d2004",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "academic-rules-handbook-jun-2026.pdf",
+      "title": "Academic Rules Handbook Jun 2026",
+      "doc_version": "2026-06",
+      "page_count": 58,
+      "sha256": "4cfee3e191b84aeb9168f17656c7642212ff52b90f2780d028b33c154aa74b62",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "newer version 2027-01 detected; older edition marked superseded and archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "student-handbook-jun-2026.pdf",
+      "title": "Student Handbook Jun 2026",
+      "doc_version": "2026-06",
+      "page_count": 64,
+      "sha256": "717eb4b8d37e50185ffe952735c08ef19edd16074d547f10ebd22cf23da67c4d",
+      "injection_attempts": 1,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "current version or no newer matching edition detected"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "annual-report-2019-20.pdf",
+      "title": "Annual Report 2019-20",
+      "doc_version": "2019-20",
+      "page_count": 33,
+      "sha256": "4d1961e340b13273bb039805ab5fd5e2c7bd0144a5bd5870f2ce4da13becd650",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "current version or no newer matching edition detected"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "title": "Faculty Entrepreneurship and Technical Start-ups Policy",
+      "doc_version": "2022-05",
+      "page_count": 8,
+      "sha256": "c2d5c7648d1593daf34d5c0596ede476e8984b0551830cc1690017e6e22f1359",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "current version or no newer matching edition detected"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "title": "Prospectus 2026 Academic Rules and Regulations",
+      "doc_version": "2026",
+      "page_count": 5,
+      "sha256": "a7e7f6896a59eb9413c9e8826e6c4c018ebe52045d10cebfcba92ded10a3174a",
+      "injection_attempts": 1,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "current version or no newer matching edition detected"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "01-enrollment.md",
+      "title": "Enrollment Guide",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "24fabad3ab5df97f4fc49106b1b7d796ee40a524df2835f234d9d8a0fa1e4dcd",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "02-canonical-duplicate.md",
+      "title": "Duplicate Notice",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "56bffd09c67df3fc83e09a1d32f01146dacd379f5bca7cea85efedb6c87e5c88",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "03-exact-duplicate.md",
+      "title": "Duplicate Notice",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "56bffd09c67df3fc83e09a1d32f01146dacd379f5bca7cea85efedb6c87e5c88",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": false,
+          "reasons": [
+            "exact duplicate of 02-canonical-duplicate.md"
+          ]
+        }
+      },
+      "quarantined": true,
+      "archived": false,
+      "quarantine_reason": [
+        "uniqueness"
+      ]
+    },
+    {
+      "source": "04-research-office.md",
+      "title": "Research Office Hours",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "cb7f2cfad42956e77253e4ed98110a6c9fc5ad43d8ff078963dbc62946810d88",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "05-research-office-near-copy.md",
+      "title": "Research Office Schedule",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "6ffe7d43041f35e22c02f835a241890bee62c7c1c6366f8a97efb54bfcd6d0f4",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": false,
+          "reasons": [
+            "near-duplicate of 04-research-office.md (cosine >= 0.940)"
+          ]
+        }
+      },
+      "quarantined": true,
+      "archived": false,
+      "quarantine_reason": [
+        "uniqueness"
+      ]
+    },
+    {
+      "source": "06-truncated-policy.md",
+      "title": "Truncated Policy",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "b64eca97c71a49e26a184a3a610e582ae1879ad45dd812534e2a7a647b3bed75",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": false,
+          "reasons": [
+            "page count mismatch: metadata=2, extracted=1"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": true,
+      "archived": false,
+      "quarantine_reason": [
+        "completeness"
+      ]
+    },
+    {
+      "source": "07-missing-metadata.md",
+      "title": "",
+      "doc_version": "unknown",
+      "page_count": 1,
+      "sha256": "427e05615a485ae5edc651b331733770687c870f06ad22ce9f9f18991ebe781b",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": false,
+          "reasons": [
+            "missing title",
+            "missing date/version metadata",
+            "missing page-count metadata"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "current version or no newer matching edition detected"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": true,
+      "archived": false,
+      "quarantine_reason": [
+        "completeness"
+      ]
+    },
+    {
+      "source": "08-academic-rules-handbook-2026.md",
+      "title": "Academic Rules Handbook Jun 2026",
+      "doc_version": "2026-06",
+      "page_count": 1,
+      "sha256": "1f7483219f245038968f87b80c9509980cc8eb4f21a653600950c0327cda810f",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "newer version 2027-01 detected; older edition marked superseded and archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": true
+    },
+    {
+      "source": "09-academic-rules-2027.md",
+      "title": "Academic Rules Handbook Jan 2027",
+      "doc_version": "2027-01",
+      "page_count": 1,
+      "sha256": "70b461878388b24506b622e29124c539f8e1684690a6f536b362a8912840244a",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "10-injected-document.md",
+      "title": "Injected Document",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "c4cc54aa7d09e6618800d8a60bbc752e793681f519e467e90cd61210ab09f4d9",
+      "injection_attempts": 1,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "11-noise-campus-map.md",
+      "title": "Campus Map Notes",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "e7d51fd033fd4194f0bdd4b70c0c4c8201534ee53f28d1b61df06f31a1adfd02",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "12-noise-weather.md",
+      "title": "Weather Bulletin",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "526b0e2cc0974d250e8f5d96e39ca006d52fe065a613f001f03b9bdcae6d1081",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "13-noise-gardens.md",
+      "title": "Garden Notice",
+      "doc_version": "2026-01",
+      "page_count": 1,
+      "sha256": "94ce652c194603772803d6e23f4cdba2dd89dae40c73a8e7254709018627b1a2",
+      "injection_attempts": 0,
+      "checks": {
+        "quality": {
+          "passed": true,
+          "reasons": [
+            "readable extraction; no material garbling detected"
+          ]
+        },
+        "completeness": {
+          "passed": true,
+          "reasons": [
+            "source, title, version, page count and extraction are present"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "edition is explicitly marked superseded and will be archived"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "quarantined": false,
+      "archived": false
+    },
+    {
+      "source": "14-corrupt.pdf",
+      "title": "14-corrupt",
+      "doc_version": "unknown",
+      "page_count": 0,
+      "sha256": "17258f43c1d16fad8eb362df671b89c05bd13267943a9042030bd0ac9f408ed5",
+      "checks": {
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "extraction failed: ExtractionError: 14-corrupt.pdf: No /Root object! - Is this really a PDF?"
+          ]
+        },
+        "completeness": {
+          "passed": false,
+          "reasons": [
+            "page count and extracted text unavailable"
+          ]
+        },
+        "recency": {
+          "passed": true,
+          "reasons": [
+            "recency could not be compared after extraction failure"
+          ]
+        },
+        "uniqueness": {
+          "passed": true,
+          "reasons": [
+            "no duplicate match was established"
+          ]
+        }
+      },
+      "quarantined": true,
+      "archived": false,
+      "quarantine_reason": [
+        "quality",
+        "completeness"
+      ]
+    }
+  ]
+}

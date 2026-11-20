@@ -1,0 +1,108 @@
+retrying invalid generation
+invalid generation
+retrying invalid generation
+invalid generation
+{"ts": "2026-11-20T23:30:28Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "undergraduate-academic-rules-aug-2023.pdf", "pages": 26, "ocr_pages": 24, "empty_pages": [3]}
+{"ts": "2026-11-20T23:30:36Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "academic-rules-handbook-jun-2026.pdf", "pages": 58, "ocr_pages": 5, "empty_pages": [2, 56, 57]}
+{"ts": "2026-11-20T23:30:43Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "student-handbook-jun-2026.pdf", "pages": 64, "ocr_pages": 4, "empty_pages": [2, 63]}
+{"ts": "2026-11-20T23:30:47Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "annual-report-2019-20.pdf", "pages": 33, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:03Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "pages": 8, "ocr_pages": 8, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "prospectus-2026-academic-rules-and-regulations.pdf", "pages": 5, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "01-enrollment.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "02-canonical-duplicate.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "04-research-office.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "08-academic-rules-handbook-2026.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "09-academic-rules-2027.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "10-injected-document.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "11-noise-campus-map.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "12-noise-weather.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "extracted", "source": "13-noise-gardens.md", "pages": 1, "ocr_pages": 0, "empty_pages": []}
+{"ts": "2026-11-20T23:31:04Z", "logger": "rahbar.indexer", "request_id": "indexer-ragops-eval-g9n4x", "msg": "chunked", "size": 400, "overlap": 50, "chunks": 678, "original_words": 37670, "stored_words": 37870, "amplification": 1.0053}
+{
+  "result": "/var/lib/rahbar/results/run-20261120T232754873941631Z.json",
+  "seed_a": {
+    "questions": 25,
+    "recall@3": 0.925,
+    "recall@5": 0.975,
+    "mrr": 0.8791666666666667,
+    "ndcg@5": 0.8862702023564977,
+    "citation_validity": 1,
+    "abstention_correctness": 1,
+    "latency_p50_ms": 1297.2,
+    "latency_p95_ms": 2070.9,
+    "answer_fact_checks": 9,
+    "answer_fact_check_count": 12,
+    "faithfulness_human_labels": null,
+    "faithfulness": null,
+    "faithfulness_label_count": 0,
+    "query_coverage": 0.8928571428571429,
+    "query_coverage_before_six": 0.6785714285714286,
+    "query_coverage_all_live": 0.575,
+    "query_coverage_after_six_all_live": 0.725,
+    "coverage_in_scope_count": 25,
+    "coverage_in_scope_total": 28
+  },
+  "seed_b": {
+    "questions": 25,
+    "recall@3": 0.925,
+    "recall@5": 0.975,
+    "mrr": 0.8791666666666667,
+    "ndcg@5": 0.8862702023564977,
+    "citation_validity": 1,
+    "abstention_correctness": 0.96,
+    "latency_p50_ms": 1192.3,
+    "latency_p95_ms": 1835.2,
+    "answer_fact_checks": 9,
+    "answer_fact_check_count": 12,
+    "faithfulness_human_labels": null,
+    "faithfulness": null,
+    "faithfulness_label_count": 0,
+    "query_coverage": 0.8928571428571429,
+    "query_coverage_before_six": 0.6785714285714286,
+    "query_coverage_all_live": 0.575,
+    "query_coverage_after_six_all_live": 0.725,
+    "coverage_in_scope_count": 25,
+    "coverage_in_scope_total": 28
+  },
+  "noise": {
+    "questions": 20,
+    "recall@3": 0.85,
+    "recall@5": 0.925,
+    "mrr": 0.8625,
+    "ndcg@5": 0.8591449286659908,
+    "citation_validity": 1,
+    "abstention_correctness": 0.95,
+    "latency_p50_ms": 1394.1,
+    "latency_p95_ms": 1823.4,
+    "answer_fact_checks": 6,
+    "answer_fact_check_count": 12,
+    "faithfulness_human_labels": null
+  },
+  "stochasticity": {
+    "recall@3": 0.0,
+    "recall@5": 0.0,
+    "mrr": 0.0,
+    "ndcg@5": 0.0,
+    "citation_validity": 0.0,
+    "abstention_correctness": -0.04,
+    "latency_p50_ms": -104.9,
+    "latency_p95_ms": -235.7
+  }
+}
+{
+  "candidate": "/var/lib/rahbar/results/run-20261120T232754873941631Z.json",
+  "baseline": "/var/lib/rahbar/results/baseline.json",
+  "thresholds": {
+    "max_recall5_drop": 0.02,
+    "min_faithfulness": 0.8,
+    "min_human_faithfulness_labels": 8,
+    "min_citation_validity": 0.95,
+    "max_latency_p95_ms": 15000,
+    "min_abstention_correctness": 1.0,
+    "min_query_coverage": 0.85
+  },
+  "decision": "reject",
+  "failures": [
+    "faithfulness needs at least 8 human labels; got 0"
+  ]
+}
