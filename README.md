@@ -138,3 +138,13 @@ The [reviewed real audit](eval/runs/verified-f583517/) passed all three chunk se
 The previous successful [CD run](https://github.com/TahaSohail-Goat/SCD_Assignment_2/actions/runs/42273870473) and [evaluation-gate demonstration](docs/evidence/eval-gate.md) remain historical evidence. They do not prove this unmerged completion branch. Record the new successful run and exact Docker Hub tag links in [SUBMISSION](docs/SUBMISSION.md) after this branch is reviewed and released.
 
 [AI-USAGE](docs/AI-USAGE.md) attributes generated work and verification. [LICENSE](LICENSE) reserves third-party terms and permits academic assessment. Both teammates must understand the implementation and explain the evidence in a viva; automation cannot satisfy that personal requirement.
+## Assignment 3: RAGOps
+
+The Assignment 3 implementation, generated datasets, Kubernetes jobs, runtime gate,
+and evidence/report workflow are documented in
+[`docs/ASSIGNMENT-03-RAGOPS.md`](docs/ASSIGNMENT-03-RAGOPS.md). Start with
+`make ragops-data`, then run `make test && make lint`. After the real-corpus
+cluster is healthy, run Batch B, capture baseline/candidate evaluations, and only
+promote after the configured gate passes. Result JSON and traces persist on the
+`ragops-data` PVC. Human authorship/review and report identity fields are explicitly
+tracked; generated questions are not represented as group-authored.
