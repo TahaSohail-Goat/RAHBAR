@@ -6,6 +6,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -19,12 +20,17 @@ from reportlab.platypus import (Image, PageBreak, Paragraph, SimpleDocTemplate, 
 
 REPO = Path(__file__).resolve().parents[2]
 SCREENSHOT_CAPTIONS = {
-    "01-data": "A — pre-chunking verification, Batch B quarantine and archive report",
-    "02-evaluation": "B — golden evaluation summary and human-review worksheet",
-    "03-gate": "C — candidate gate rejection and passing release decision",
-    "04-traces": "D — persisted query trace, reconstructed prompt and metrics endpoint",
-    "05-coverage": "E — live-query coverage before/after expansion and uncovered groups",
-    "06-kubernetes": "F — Kubernetes PVC, jobs, candidate Service and rollback state",
+    "A1-verification": "A1 — Batch B verification report with each check and its reasons",
+    "A2-incremental": "A2 — unchanged ingestion run with zero chunks embedded",
+    "B3-evaluation": "B3 — module, retrieval and end-to-end evaluation summary",
+    "C2-reject": "C2 — candidate blocked by the release gate",
+    "C2-pass": "C2 — passing release gate after completed human review",
+    "D1-trace": "D1 — one complete JSON trace record",
+    "D2-reconstruct": "D2 — trace command rebuilding the exact prompt and context",
+    "E2-coverage": "E2/E4 — live-query coverage before and after six additions",
+    "F1-f2-k8s": "F1/F2 — namespace objects, PVC, ConfigMap, CronJob and Jobs",
+    "F2-logs": "F2 — completed ingestion and evaluation Job logs",
+    "F3-f5-release": "F3/F5 — ConfigMap gate change, rollout/undo trace and resource measurements",
 }
 
 
@@ -64,6 +70,26 @@ def table(data: list[list[Any]], widths: list[float] | None = None) -> Table:
     return result
 
 
+def compact_table(data: list[list[Any]], widths: list[float]) -> Table:
+    style = ParagraphStyle("CompactCell", parent=getSampleStyleSheet()["BodyText"],
+                           fontSize=7.4, leading=8.5, spaceAfter=0)
+    rendered = [[Paragraph(str(value), style) for value in row] for row in data]
+    result = Table(rendered, colWidths=widths, repeatRows=1, hAlign="LEFT")
+    result.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#15324b")),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("GRID", (0, 0), (-1, -1), 0.3, colors.HexColor("#b7c6d1")),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#eef3f6")]),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 4),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+        ("TOPPADDING", (0, 0), (-1, -1), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+    ]))
+    return result
+
+
 def load_review_counts(path: Path) -> tuple[int, int]:
     if not path.is_file():
         return 0, 0
@@ -73,6 +99,40 @@ def load_review_counts(path: Path) -> tuple[int, int]:
     reviewed = sum(bool(row.get("synthetic_question_reviewed_by_group_member", "").strip())
                    for row in rows)
     return authored, reviewed
+
+
+def resource_observation(path: Path) -> str:
+    """Summarize a captured `kubectl top pod` table without inventing values."""
+    if not path.is_file():
+        return "not captured"
+    rows: dict[str, list[tuple[int, int]]] = {"api": [], "candidate": [], "chroma": [], "redis": []}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        fields = re.split(r"\s+", line.strip())
+        if len(fields) < 3 or fields[0] == "NAME":
+            continue
+        name, cpu, memory = fields[:3]
+        group = ("candidate" if "candidate" in name else
+                 "api" if name.startswith("api-") else
+                 "chroma" if name.startswith("chroma-") else
+                 "redis" if name.startswith("redis-") else None)
+        if group is None:
+            continue
+        cpu_value = int(cpu.removesuffix("m")) if cpu.endswith("m") else int(float(cpu) * 1000)
+        memory_value = int(memory.removesuffix("Mi")) if memory.endswith("Mi") else 0
+        rows[group].append((cpu_value, memory_value))
+
+    def bounds(group: str) -> str:
+        values = rows[group]
+        if not values:
+            return f"{group}: not captured"
+        cpus = [value[0] for value in values]
+        memories = [value[1] for value in values]
+        cpu_text = f"{min(cpus)}-{max(cpus)}m" if min(cpus) != max(cpus) else f"{min(cpus)}m"
+        memory_text = (f"{min(memories)}-{max(memories)}Mi" if min(memories) != max(memories)
+                       else f"{min(memories)}Mi")
+        return f"{group}: {cpu_text}/{memory_text}"
+
+    return "; ".join(bounds(group) for group in ("api", "candidate", "chroma", "redis"))
 
 
 def build(args: argparse.Namespace) -> None:
@@ -94,6 +154,16 @@ def build(args: argparse.Namespace) -> None:
     archived = sum(bool(row.get("archived")) for row in verification_rows)
     quarantined = sum(bool(row.get("quarantined")) for row in verification_rows)
     review_counts = load_review_counts(args.human_review)
+    failed_checks: dict[str, int] = {}
+    for row in verification_rows:
+        for name, check in row.get("checks", {}).items():
+            if not check.get("passed", False):
+                failed_checks[name] = failed_checks.get(name, 0) + 1
+    leading_check = max(failed_checks, key=failed_checks.get) if failed_checks else "not measured"
+    missed_injection = any(row.get("injection_attempts", 0) and not row.get("quarantined", False)
+                           for row in verification_rows)
+    failed_fact_rows = [row.get("id") for row in seed_a.get("rows", [])
+                        if row.get("required_facts_pass") is False]
 
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name="Cover", parent=styles["Title"], fontSize=25,
@@ -107,7 +177,7 @@ def build(args: argparse.Namespace) -> None:
                               leading=12, alignment=TA_CENTER))
     story: list[Any] = []
 
-    # Main report: six deliberately bounded pages. Screenshots follow as appendix.
+    # Main report: eight deliberately bounded pages. Screenshots follow as appendix.
     story += [Spacer(1, 23 * mm), Paragraph("RAHBAR", styles["Cover"]),
               Paragraph("Assignment 03 — RAGOps", styles["Cover"]), Spacer(1, 8 * mm),
               Paragraph("Software Construction and Development", styles["Heading2"]),
@@ -210,11 +280,13 @@ def build(args: argparse.Namespace) -> None:
                         "per-stage latency. The CLI verifies the prompt hash and reconstructs the "
                         "recorded context.", styles["BodyText"]), Spacer(1, 4 * mm),
               table([["Operational item", "Measured evidence"],
-                     ["Indexer resources", "Capture `kubectl top pod` while the Batch B Job runs."],
+                      ["Observed pod CPU/memory", resource_observation(args.resource_usage)],
+                      ["Declared requests / limits", "API 200m/256Mi to 1 CPU/1Gi; Chroma 100m/512Mi to 1 CPU/2Gi; Redis 50m/128Mi to 500m/512Mi."],
+                      ["Indexer Job sample", "No running-job `kubectl top` sample was captured; see its requests/limits in k8s/assignment3/batch-b-job.yaml."],
                      ["API metrics", "`/metrics` via port-forward; request, retrieval, generation, cache, abstention and token metrics."],
                      ["Trace summary", "Top-1 similarity distribution, cache/abstention rates, per-stage p95 and injection flags."],
                      ["Persistence", "PVC holds the data lake, report files, embedding ledger, archive, quarantine and JSONL traces."],
-                     ["Bad release recovery", "Gate refusal and/or rollout undo followed by readiness verification."],
+                      ["Bad release recovery", "Bad embedding-model rollout stalled; undo restored baseline readiness. See rollback trace."],
               ], [42 * mm, 120 * mm]), Spacer(1, 5 * mm),
               Paragraph("The assignment screenshots that follow should show actual command or UI "
                         "output from this cluster; screenshots are kept in the appendix and do not "
@@ -253,6 +325,64 @@ def build(args: argparse.Namespace) -> None:
                         "at runtime; the team must verify questions, labels, citations, and all "
                         "reported live measurements before submission.", styles["Small"]), PageBreak()]
 
+    story += [Paragraph("G — Lifecycle and quality mapping", styles["Section"]),
+              Paragraph("This follows the two intertwined lifecycles in Figure 3 of the reference "
+                        "paper. Open items are recorded explicitly for team review.", styles["BodyText"]),
+              Spacer(1, 3 * mm),
+              compact_table([["Figure 3 stage", "Implementation / evidence", "Open item"],
+                ["Ingest", "PDF/Markdown extraction in indexer/pipeline/extract.py; Batch B generator.", "Batch source set is local and synthetic."],
+                ["Verify", "Four checks and per-run report; measured quarantine/archive counts.", "Injected file is flagged but not quarantined."],
+                ["Update data lake", "PVC lake, quarantine/archive, SQLite content-hash ledger.", "Restore demo still needs a captured run."],
+                ["Update retrieval sources", "Immutable Chroma snapshots; active pointer switches after indexing.", "Deleted-source orphans: zero in measured run."],
+                ["Offline testing", "Module/retrieval/E2E runner, two seeds, runtime gate.", "Eight human faithfulness labels pending."],
+                ["Live testing", "Separate candidate collection, Deployment and Service.", "Promotion blocked while gate rejects."],
+                ["Check coverage", "40 live queries, 0.72 similarity, six additions.", "New questions need group review."]],
+                [29 * mm, 76 * mm, 57 * mm]), Spacer(1, 4 * mm),
+              compact_table([["Table 2 quality", "Measure / threshold", "Current evidence"],
+                ["Adaptability", "Configurable chunk size and incremental source updates.", "400/50 baseline vs 320/50 candidate; 678/684 chunks."],
+                ["Monitorability", "Recall@5 drop ≤0.02; citation ≥0.95; abstention ≥1.00; p95 ≤15s; coverage ≥0.85.", "Timestamped results and trace summary."],
+                ["Observability", "Track relevance, context adherence, injection flags and cache.", "JSONL traces; injection flagged; human labels pending."],
+                ["Traceability", "Record versions, retrieval routing, prompt hash and grounded sources.", "Trace reconstruction and PVC JSONL."],
+                 ["Reliability", "Resource limits, readiness, persistent PVC and controlled undo.", "Bad-model rollout stalled; undo restored baseline readiness and a new trace confirmed the collection/model."]],
+                [29 * mm, 72 * mm, 61 * mm]), PageBreak()]
+
+    root_cause = (args.root_cause.read_text(encoding="utf-8").strip()
+                  if args.root_cause.is_file() else
+                  "[select one measured wrong or abstained answer and record its trace-only cause]")
+    story += [Paragraph("G — Short answers and trace diagnosis", styles["Section"]),
+              Paragraph(f"<b>(a) Verification:</b> {leading_check} caught the most failed checks "
+                        f"({failed_checks.get(leading_check, 0)}). An injected document was flagged "
+                        f"but remained indexable ({'yes' if missed_injection else 'not observed'}); "
+                        "a policy to quarantine flagged instructions plus human review would catch it earlier.", styles["Small"]),
+              Spacer(1, 2 * mm),
+              Paragraph(f"<b>(b) Metric gap:</b> Module embeddings had a paraphrase/unrelated cosine "
+                        f"gap of {fmt((module.get('pairs') or {}).get('gap'))} and determinism difference "
+                        f"{fmt(module.get('embedding_determinism_max_abs_difference'), 6)}, while answer "
+                        f"fact probes passed {seed_a.get('answer_fact_checks', 'not measured')}/"
+                        f"{seed_a.get('answer_fact_check_count', 'not measured')}; missed rows: "
+                        f"{', '.join(failed_fact_rows) or 'none'}.", styles["Small"]),
+              Spacer(1, 2 * mm),
+              Paragraph(f"<b>(c) Versions:</b> {archived} older edition(s) were archived and marked "
+                        "superseded instead of deleted. Deleting them removes retrieval history and "
+                        "prevents rollback to an earlier policy.", styles["Small"]),
+              Spacer(1, 2 * mm),
+              Paragraph("<b>(d) Least-trusted metric:</b> semantic query coverage. A 0.72 cosine "
+                        "cutoff is only a proxy for test-set representativeness; it does not establish "
+                        "answer correctness and must be read with retrieval and answer metrics.", styles["Small"]),
+              Spacer(1, 2 * mm),
+              Paragraph("<b>(e) Hardest paper idea:</b> coordinating software and data lifecycles "
+                        "without exposing a partially indexed collection. We use immutable Chroma "
+                        "snapshots and switch the active pointer only after verification and indexing, "
+                        "adapting the paper's update-and-test feedback loop to this small cluster.", styles["Small"]),
+              Spacer(1, 2 * mm),
+              Paragraph("<b>(f) Kubernetes:</b> indexer Job/CronJob is the only vector writer; API "
+                        "Deployments read. Chroma StatefulSet and PVC preserve data, ConfigMaps carry "
+                        "thresholds, and the candidate Deployment/Service isolate the changed pipeline "
+                        "until a gate passes.", styles["Small"]),
+              Spacer(1, 4 * mm),
+              Paragraph("<b>D5 — Root cause from trace only (five lines):</b>", styles["Small"]),
+              Paragraph(root_cause.replace("\n", "<br/>"), styles["Small"]), PageBreak()]
+
     screenshots = sorted(args.screenshots.glob("*.png")) if args.screenshots.is_dir() else []
     for prefix, caption in SCREENSHOT_CAPTIONS.items():
         match = next((path for path in screenshots if path.name.startswith(prefix)), None)
@@ -280,7 +410,7 @@ def build(args: argparse.Namespace) -> None:
         leftMargin=18 * mm, topMargin=17 * mm, bottomMargin=20 * mm,
         title="RAHBAR Assignment 03 — RAGOps", author="RAHBAR Team")
     document.build(story, onFirstPage=footer, onLaterPages=footer)
-    print(f"Wrote {output} with 6 report pages and {len(SCREENSHOT_CAPTIONS)} screenshot appendix pages")
+    print(f"Wrote {output} with 8 report pages and {len(SCREENSHOT_CAPTIONS)} screenshot appendix pages")
 
 
 def main() -> int:
@@ -293,6 +423,10 @@ def main() -> int:
     parser.add_argument("--gate", type=Path)
     parser.add_argument("--human-review", type=Path,
                         default=REPO / "eval/assignment3/human_review.csv")
+    parser.add_argument("--root-cause", type=Path,
+                        default=REPO / "eval/results/root-cause.md")
+    parser.add_argument("--resource-usage", type=Path,
+                        default=REPO / "eval/results/resource-usage.txt")
     parser.add_argument("--screenshots", type=Path,
                         default=REPO / "docs/assignment3/screenshots")
     parser.add_argument("--out", type=Path,

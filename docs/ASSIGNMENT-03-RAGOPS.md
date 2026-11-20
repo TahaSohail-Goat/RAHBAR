@@ -75,7 +75,9 @@ eight labels exist, the runtime gate fails closed.
    Inspect the newest verification and ingestion JSON on the PVC. Confirm exact
    and near duplicates, malformed files, the injected document, changed/reused
    chunk counts, zero deleted-document orphans, and archived newer-version
-   behavior. A second unchanged run should report zero chunk embeddings.
+   behavior. For the unchanged-run proof, delete only the completed Job object,
+   apply `batch-b-job.yaml` again without changing the corpus, and confirm the
+   new ingestion report says `chunks_embedded: 0` and all chunks reused.
 
 5. Build the evaluation image and capture a same-dataset live baseline:
 
@@ -120,6 +122,13 @@ eight labels exist, the runtime gate fails closed.
    ```bash
    kubectl -n rahbar edit configmap ragops-gates
    ```
+
+   The `ragops-gate-check` Job evaluates the latest saved candidate result against
+   the mounted ConfigMap without repeating the full suite. Delete and recreate
+   that Job after a ConfigMap edit to show that the failure list changes without
+   rebuilding the image. Restore the committed thresholds afterward. The pass
+   demonstration still requires eight genuine human labels and must not be
+   fabricated.
 
    The next Job reads the ConfigMap without rebuilding an image. Do not loosen a
    threshold just to manufacture a pass.
@@ -169,3 +178,11 @@ commands; do not submit fabricated terminal content. Roll numbers, group-written
 question claims, and subjective human labels need teammate verification. The
 source intentionally leaves those review actions explicit rather than inventing
 identity or claiming work that was not performed.
+
+The report builder reserves eight main pages and creates one appendix page per
+required screenshot. It includes the Figure 3 lifecycle mapping, five Table 2
+qualities, six short answers, and the five-line trace-only diagnosis. The eleven
+appendix captures are A1 verification, A2 incremental ingestion, B3 evaluation,
+C2 rejected gate, C2 passing gate, D1 trace, D2 reconstruction, E2/E4 coverage,
+F1/F2 cluster state, F2 Job logs, and F3/F5 threshold/rollback/resources. A
+passing-gate capture must wait for genuine human labels and a real passing run.

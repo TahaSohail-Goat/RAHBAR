@@ -148,3 +148,22 @@ cluster is healthy, run Batch B, capture baseline/candidate evaluations, and onl
 promote after the configured gate passes. Result JSON and traces persist on the
 `ragops-data` PVC. Human authorship/review and report identity fields are explicitly
 tracked; generated questions are not represented as group-authored.
+
+### Assignment 3 commands by part
+
+Run from the repository root in WSL with the Assignment 3 profile and kubeconfig
+exported as shown in [`docs/ASSIGNMENT-03-RAGOPS.md`](docs/ASSIGNMENT-03-RAGOPS.md).
+
+| Part | Commands |
+| --- | --- |
+| A — verify and update | `make ragops-batch-b`; `kubectl -n rahbar wait --for=condition=complete job/batch-b-index --timeout=30m`; `kubectl -n rahbar logs job/batch-b-index`. For the unchanged rerun, delete the completed `batch-b-index` Job, apply `k8s/assignment3/batch-b-job.yaml` again, and confirm `chunks_embedded: 0`. |
+| B — three-level evaluation | `make ragops-image PROFILE=rahbar-a3-wsl`; `make ragops-baseline-job`; `kubectl -n rahbar wait --for=condition=complete job/ragops-baseline --timeout=60m`; `make ragops-eval-job`; `kubectl -n rahbar logs job/ragops-eval`. Complete the eight-answer faithfulness worksheet by hand before claiming a release pass. |
+| C — change and gate | `make ragops-candidate`; wait for `job/candidate-index` and `deployment/api-candidate`; `make ragops-eval-job`; inspect `/var/lib/rahbar/results/gate-latest.json` on the PVC. Use `make ragops-gate-job` to re-run the saved-result gate using the mounted ConfigMap. |
+| D — trace and metrics | `kubectl -n rahbar port-forward svc/api 8000:8000`; query `/metrics`; run `python -m eval.assignment3.trace TRACE_ID --file traces/sample.jsonl` and `python -m eval.assignment3.trace_summary --file traces/sample.jsonl --out eval/results/trace-summary.json`. |
+| E — coverage and drift | `make ragops-coverage`; inspect `eval/results/coverage.json`; rerun `make ragops-baseline-job` and `make ragops-eval-job` after Batch B to compare the same golden set against the updated corpus. |
+| F — Kubernetes evidence | `kubectl -n rahbar get all,pvc,configmap,cronjob,job`; `kubectl -n rahbar logs job/batch-b-index`; `kubectl -n rahbar logs job/ragops-eval`; edit a gate threshold with `kubectl -n rahbar edit configmap ragops-gates`, delete/reapply `ragops-gate-check`, and compare its log; `kubectl -n rahbar rollout status deployment/api`; after the rollback exercise use `kubectl -n rahbar rollout undo deployment/api` and verify `/readyz` plus a new trace. |
+
+The screenshot appendix has eleven individually named captures, listed in
+[`docs/ASSIGNMENT-03-RAGOPS.md`](docs/ASSIGNMENT-03-RAGOPS.md). The pass screenshot
+is intentionally unfilled until the team has supplied genuine manual labels and
+the candidate has passed the configured gate.
