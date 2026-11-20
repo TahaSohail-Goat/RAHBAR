@@ -27,6 +27,7 @@ from indexer.pipeline.embed import embed
 from indexer.pipeline.run import build_chunks, prepare
 from indexer.pipeline.embed import embed as embed_indexer
 from eval.assignment3.coverage import compare as compare_coverage
+from eval.assignment3.corpus import verified_corpus_sources
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results"
@@ -57,7 +58,8 @@ def embed_metrics(settings: Any) -> dict:
         similarities.append((pair["kind"], dot / norm if norm else 0.0))
     repeated = embed([texts[0], texts[0]], settings)
     max_difference = max(abs(a - b) for a, b in zip(repeated[0], repeated[1]))
-    documents = prepare(settings.corpus_dir)
+    documents = prepare(settings.corpus_dir,
+                        allowed_sources=verified_corpus_sources(settings))
     chunks = build_chunks(documents, settings.chunk_size, settings.chunk_overlap)
     sample = [chunk.text for chunk in chunks[:min(32, len(chunks))]]
     timing_started = time.perf_counter()
