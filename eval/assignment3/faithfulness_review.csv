@@ -1,0 +1,44 @@
+question_id,trace_id,question,answer,citations,faithfulness_supported_yes_no,reviewer,notes
+q01,eval-42-q01-9952ffb1,"In the current undergraduate academic rules, when does the academic year start and end?",1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2],"[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""1.2"", ""page"": 7}]",,,
+q02,eval-42-q02-752b9023,What is the duration in minutes of one classroom teaching period under the current undergraduate rules?,"1.8 A classroom-teaching hour or one period is of 50 to 60 minutes. [academic-rules-handbook-jun-2026.pdf / 1.8]
+U ndergraduate Academic Rules and Regulations 2026 1 [academic-rules-handbook-jun-2026.pdf / 1.8]","[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""1.8"", ""page"": 7}]",,,
+q03,eval-42-q03-eec90c76,What minimum CGPA avoids academic warning in an undergraduate programme?,5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs. [academic-rules-handbook-jun-2026.pdf / 5.4],"[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""5.4"", ""page"": 24}]",,,
+q04,eval-42-q04-2ed6d6b5,What is the normal credit-hour assignment for a lab or workshop?,1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10],"[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""1.10"", ""page"": 8}]",,,
+q05,eval-42-q05-ac9fe25a,"In the undergraduate letter-grade interpretation table, which interpretation corresponds to A and A-?","2.2 Interpretation of Letter Grades is as follows: [academic-rules-handbook-jun-2026.pdf / 2.2]
+| Grade | Interpretation | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| A+ | Outstanding | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| A, A- | Excellent | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| B+, B, B- | Good | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| C+, C | Adequate | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| C-, D+, D | Pass, the student may repeat the course | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| F | Fail | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| FA | Fail due to shortage of attendance | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| I | Incomplete | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| W | Withdrawn | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| S | Satisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]
+| U | Unsatisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]
+U ndergraduate Academic Rules and Regulations 2026 5 [academic-rules-handbook-jun-2026.pdf / 2.2]","[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""2.2"", ""page"": 11}]",,,
+q06,eval-42-q06-3b81bf9d,"According to the student handbook, may generative AI be a student's only source for preparatory research?","4. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]
+Acceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]
+Generative AI tools are not academic sources; they do not produce fact- checked content, and they can, and [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]","[{""source"": ""student-handbook-jun-2026.pdf"", ""section"": ""4. Acceptable Uses of Generative AI Tools"", ""page"": 50}]",,,
+q07,eval-42-q07-cf78763f,What is the maximum absence the head of department may condone in an undergraduate course for a genuine reason?,"1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]
+Absence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]","[{""source"": ""academic-rules-handbook-jun-2026.pdf"", ""section"": ""1.21"", ""page"": 10}]",,,
+q08,eval-42-q08-5651f952,"Under the technical start-up policy, what journal-publication evidence must a faculty applicant have from the two years before applying?","6.4.4. 6:5; [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Evaluation criteria for a technical start-up Faculty member must have published one journal paper (at least online with a DOI number), with the impact factor journals appearing in Journal Citation Reports by Web of [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Science Group (JCR) within two years prior to the date of application with NUCES affiliation. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Faculty member must have completed or currently be involved as a Principal Investi ‘gator or Co-Principal Investigator of an externally funded research project of significant funding amount within the last five years. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+The start-up should align with the ongoing research at the university and the university degree programs. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+The start-up should be related to emerging technologies and should be aiming to commercialise the research of faculty members or research projects. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Procedure for submitting the application Applications may be submitted at any time. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Application must be submitted on the prescribed form (Annex -I) with all the required information. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+A brief business plan must be provided using the form provided in Annex-II. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Following information should be provided on the prescribed form: Technical domain of the start-up Research outputs /technologies/products that the start-up aims to commercialize, A _ transfer/commercial usage of Intellectual Property required from the university should be explicitly listed (see Intellectual Property Rights (IP) Policy available at university website). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+List of NUCES faculty members and staff involved in the start-up Applications must be submitted through the campus Director office. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Procedure for evaluating the application [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+The Campus Director shall provide comments, recommend the application and forward the application to ORIC. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+ORIC shall evaluate and recommend the application using the criteria provided in Section 5). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+For final approval, the cases shall be presented to the RECTOR NUCES for approval. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+The decision by the RECTOR is final in this regard. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Mandatory periodic (six monthly) deliverables of the start-up Approximate business/funds being generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Number of employments created by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]
+Summary of industry partnerships generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]","[{""source"": ""faculty-entrepreneurship-and-technical-start-ups-policy.pdf"", ""section"": ""1. Purpose"", ""page"": 2}]",,,
