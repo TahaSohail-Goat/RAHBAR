@@ -80,9 +80,16 @@ class SemanticCache:
         return f"rahbar:cache:{generation}:v4-{scope}:"
 
     def lookup(self, embedding: list[float], *, generation_id: str | None = None) -> AskResponse | None:
+        response, _ = self.lookup_with_trace(embedding, generation_id=generation_id)
+        return response
+
+    def lookup_with_trace(
+        self, embedding: list[float], *, generation_id: str | None = None,
+    ) -> tuple[AskResponse | None, dict | None]:
         prefix = self._prefix(generation_id)
         best_score = self.settings.cache_threshold
         best: AskResponse | None = None
+        best_trace: dict | None = None
         for key in self.client.scan_iter(match=prefix + "*"):
             raw = self.client.get(key)
             if not isinstance(raw, str):
@@ -92,12 +99,14 @@ class SemanticCache:
             if score >= best_score:
                 best_score = score
                 best = AskResponse.model_validate(entry["response"])
-        return best
+                best_trace = entry.get("trace")
+        return best, best_trace
 
     def store(
         self, question: str, embedding: list[float], response: AskResponse,
-        *, generation_id: str | None = None,
+        *, generation_id: str | None = None, trace: dict | None = None,
     ) -> None:
         key = self._prefix(generation_id) + hashlib.sha256(question.strip().lower().encode()).hexdigest()
-        payload = {"embedding": embedding, "response": response.model_dump(mode="json")}
+        payload = {"embedding": embedding, "response": response.model_dump(mode="json"),
+                   "trace": trace or {}}
         self.client.setex(key, self.settings.cache_ttl_seconds, json.dumps(payload))

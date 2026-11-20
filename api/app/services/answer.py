@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import logging
+import json
+import re
 import time
 
 from ..config import Settings
@@ -15,6 +17,8 @@ from ..schemas import Answer, AskResponse, Passage, RetrievedRef
 from .cache import SemanticCache, is_follow_up
 from .grounding import render_evidence
 from .prompt import factual_question, select_context
+from .prompt import messages
+from ..tracing import append_trace, cached_trace_snapshot, update_trace
 
 log = logging.getLogger("rahbar.answer")
 _NO_EVIDENCE = "The available corpus does not contain enough evidence to answer this question."
@@ -37,7 +41,8 @@ def _response(answer: Answer, passages: list[Passage], provider: str) -> AskResp
         request_id=request_id_var.get(), answer=answer.answer, citations=answer.citations,
         answered_from_context=answer.answered_from_context, confidence=answer.confidence,
         retrieved=[RetrievedRef(
-            chunk_id=p.chunk_id, source=p.source, section=p.section, page=p.page, score=p.score
+            chunk_id=p.chunk_id, source=p.source, section=p.section, page=p.page, score=p.score,
+            doc_version=p.doc_version, superseded=p.superseded,
         ) for p in passages],
         provider=provider,
     )
@@ -75,6 +80,8 @@ def answer_question(
     embedding: list[float] | None = None
     generation_id = None
     query = factual_question(question)
+    update_trace(rewritten_query=query, cache_status="skipped", stage_latency_ms={})
+    request_started = time.perf_counter()
     follow_up = is_follow_up(query)
     skip_cache = follow_up or is_historical_question(query)
     if follow_up:
@@ -100,19 +107,26 @@ def answer_question(
     if not skip_cache and embedding is not None and cache is not None:
         try:
             generation_id = cache.generation_id()
-            cached = cache.lookup(embedding, generation_id=generation_id)
+            cached, cached_trace = cache.lookup_with_trace(embedding, generation_id=generation_id)
             if cached is not None:
+                if cached_trace:
+                    update_trace(**cached_trace, trace_reconstructed_from_cache=True)
+                update_trace(cache_status="hit", stage_latency_ms={
+                    "embedding_and_cache_ms": round((time.perf_counter() - retrieval_started) * 1000, 2)})
                 metrics.record_cache_lookup("hit")
                 metrics.RETRIEVAL_LATENCY.observe(time.perf_counter() - retrieval_started)
                 response = cached.model_copy(update={"request_id": request_id_var.get(),
                                                      "cached": True})
                 return _finish(response, question, cache, session_id, settings)
             metrics.record_cache_lookup("miss")
+            update_trace(cache_status="miss")
         except Exception as exc:
             metrics.record_cache_lookup("error")
+            update_trace(cache_status="error")
             log.warning("cache lookup failed", extra={"error": type(exc).__name__})
     else:
         metrics.record_cache_lookup("skipped")
+        update_trace(cache_status="skipped")
 
     try:
         passages = retriever.retrieve(query, k=settings.top_k, embedding=embedding)
@@ -122,15 +136,31 @@ def answer_question(
         return _finish(_decline(_FALLBACK, provider.name), question, cache, session_id, settings)
     finally:
         metrics.RETRIEVAL_LATENCY.observe(time.perf_counter() - retrieval_started)
+    update_trace(stage_latency_ms={"retrieval_ms": round(
+        (time.perf_counter() - retrieval_started) * 1000, 2)})
+    prompt = json.dumps(messages(query, []), ensure_ascii=False)
+    update_trace(retrieved=[{"chunk_id": p.chunk_id, "document_id": p.source,
+                            "document_version": p.doc_version, "source": p.source,
+                            "section": p.section, "page": p.page, "score": p.score,
+                            "text": p.text} for p in passages],
+                 reranked_order=[p.chunk_id for p in passages], prompt=prompt)
     grounded = [p for p in passages if p.score >= settings.relevance_floor]
 
     valid_generation = False
     total_input = total_output = 0
+    generation_elapsed = 0.0
     if not grounded:
         answer = Answer(reasoning="no passage cleared the relevance floor", answer=_NO_EVIDENCE,
                         citations=[], answered_from_context=False, confidence="low")
     else:
         context = select_context(query, grounded)
+        prompt = json.dumps(messages(query, context), ensure_ascii=False)
+        update_trace(
+                     reranked_order=[p.chunk_id for p in context],
+                     prompt=prompt)
+        if any(re.search(r"\b(ignore|disregard|override|reveal|system prompt)\b", p.text, re.I)
+               for p in context):
+            append_trace("guardrail_actions", "instruction-like text in retrieved evidence flagged as untrusted")
         log.info("generation context", extra={"chunk_ids": [p.chunk_id for p in context],
                                               "scores": [round(p.score, 4) for p in context]})
         answer = Answer(reasoning="model output unavailable", answer=_FALLBACK, citations=[],
@@ -164,17 +194,25 @@ def answer_question(
                 log.warning("retrying invalid generation" if attempt == 0 else "invalid generation",
                             extra={"attempt": attempt + 1, "error": type(exc).__name__})
             finally:
-                metrics.GENERATION_LATENCY.observe(time.perf_counter() - generated_at)
+                elapsed = time.perf_counter() - generated_at
+                generation_elapsed += elapsed
+                metrics.GENERATION_LATENCY.observe(elapsed)
         if not valid_generation:
             metrics.FALLBACKS.inc()
 
     if not answer.answered_from_context:
         metrics.ABSTENTIONS.inc()
     response = _response(answer, passages, provider.name)
+    update_trace(stage_latency_ms={
+        "retrieval_ms": round((time.perf_counter() - retrieval_started) * 1000, 2),
+        "generation_ms": round(generation_elapsed * 1000, 2),
+        "total_ms": round((time.perf_counter() - request_started) * 1000, 2),
+    }, latency_ms=round((time.perf_counter() - request_started) * 1000, 2))
     if (generation_id is not None and valid_generation and answer.answered_from_context
             and embedding is not None and cache is not None):
         try:
-            cache.store(question, embedding, response, generation_id=generation_id)
+            cache.store(question, embedding, response, generation_id=generation_id,
+                        trace=cached_trace_snapshot())
         except Exception as exc:
             log.warning("cache store failed", extra={"error": type(exc).__name__})
     return _finish(response, question, cache, session_id, settings, (total_input, total_output))

@@ -13,6 +13,7 @@ import httpx
 from ..config import Settings
 from ..schemas import Passage
 from ..services.cache import SemanticCache
+from ..tracing import append_trace, update_trace
 
 _HISTORICAL = re.compile(
     r"\b(?:old|older|previous|prior|superseded|historical|former) "
@@ -86,8 +87,16 @@ class ChromaRetriever:
 
     def retrieve(self, question: str, k: int, embedding: list[float] | None = None) -> list[Passage]:
         cache = SemanticCache(self.settings)
-        collection = self.client.get_collection(cache.active_collection(self.settings.collection))
+        active_collection = cache.active_collection(self.settings.collection)
+        collection = self.client.get_collection(active_collection)
         metadata = collection.metadata or {}
+        try:
+            generation = cache.generation_id()
+        except Exception:
+            # Retrieval remains usable when Redis is unavailable in a local test
+            # or degraded environment; the collection name still identifies it.
+            generation = None
+        update_trace(collection=active_collection, collection_version=generation)
         if metadata.get("embed_model") != self.settings.embed_model:
             raise ValueError("active collection embedding model conflicts with API configuration")
         historical = is_historical_question(question)
@@ -103,6 +112,8 @@ class ChromaRetriever:
             query["where"] = {"superseded": False}
         elif not _YEAR.search(question):
             query["where"] = {"superseded": True}
+        update_trace(filters=[query["where"]] if "where" in query else [],
+                     query_embedding_model=self.settings.embed_model)
         result = collection.query(**query)
         ids = result["ids"][0]
         documents = result["documents"][0]
@@ -127,6 +138,8 @@ class ChromaRetriever:
             passages.sort(key=lambda p: -p.score)
         if named := explicitly_named_sources(question, passages):
             passages = [p for p in passages if p.source in named]
+            for name in sorted(named):
+                append_trace("filters", f"explicit_source:{name}")
         substantive = [passage for passage in passages if not _heading_only(passage)]
         if len(substantive) < k:
             substantive.extend(passage for passage in passages if _heading_only(passage))

@@ -42,6 +42,7 @@ class Settings:
     cache_threshold: float = 0.95
     cache_ttl_seconds: int = 86400
     temperature: float = 0.2
+    llm_seed: int = 42
     llm_model: str = "llama3.2:3b"
     ollama_url: str = _LOCAL_OLLAMA_URL
     hosted_base_url: str = ""        # e.g. an OpenAI-compatible endpoint
@@ -66,6 +67,7 @@ def get_settings() -> Settings:
         cache_threshold=_float("CACHE_THRESHOLD", 0.95),
         cache_ttl_seconds=_int("CACHE_TTL_SECONDS", 86400),
         temperature=_float("TEMPERATURE", 0.2),
+        llm_seed=_int("LLM_SEED", 42),
         llm_model=os.environ.get("LLM_MODEL", "llama3.2:3b"),
         ollama_url=os.environ.get("OLLAMA_URL", _LOCAL_OLLAMA_URL),
         hosted_base_url=os.environ.get("HOSTED_BASE_URL", ""),
