@@ -1,0 +1,29 @@
+{
+  "window": {
+    "since": null,
+    "until": null
+  },
+  "queries": 367,
+  "top1_similarity": {
+    "count": 367,
+    "p50": 0.80414975,
+    "p95": 0.9061067700000001,
+    "bins": {
+      "<0.40": 0,
+      "0.40-0.54": 0,
+      "0.55-0.69": 72,
+      ">=0.70": 295
+    }
+  },
+  "abstention_rate": 0.20708446866485014,
+  "cache_hit_rate": 0.4117647058823529,
+  "cache_hits": 7,
+  "cache_lookups": 17,
+  "stage_latency_p95_ms": {
+    "embedding_and_cache_ms": 36.3,
+    "generation_ms": 2261.73,
+    "retrieval_ms": 2340.93,
+    "total_ms": 2340.98
+  },
+  "injection_attempts_flagged": 14
+}
