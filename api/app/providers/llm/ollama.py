@@ -22,7 +22,7 @@ class OllamaProvider:
             "messages": messages(question, passages),
             "format": grounded_schema(passages),
             "stream": False,
-            "options": {"temperature": self.settings.temperature},
+            "options": {"temperature": self.settings.temperature, "seed": self.settings.llm_seed},
         }
         with httpx.Client(timeout=120) as client:
             response = client.post(self.settings.ollama_url.rstrip("/") + "/api/chat", json=payload)

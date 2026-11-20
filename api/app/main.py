@@ -23,6 +23,7 @@ from .retrieval import get_retriever
 from .routes import ask, health, metrics
 from .services.cache import SemanticCache
 from .services.readiness import check_readiness
+from .tracing import trace_context
 
 log = logging.getLogger("rahbar.api")
 
@@ -53,6 +54,9 @@ app = FastAPI(title="RAHBAR API", lifespan=lifespan)
 async def request_context(request: Request, call_next):  # type: ignore[no-untyped-def]
     rid = request.headers.get("X-Request-ID") or uuid.uuid4().hex
     token = request_id_var.set(rid)
+    trace_token = trace_context.set({"trace_id": rid,
+                                     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                                     "stage_latency_ms": {}, "guardrail_actions": []})
     start = time.perf_counter()
     status = 500
     try:
@@ -70,6 +74,7 @@ async def request_context(request: Request, call_next):  # type: ignore[no-untyp
             log.info("request", extra={"path": path, "status": status,
                                        "ms": round(elapsed * 1000, 1)})
         request_id_var.reset(token)
+        trace_context.reset(trace_token)
 
 
 app.include_router(health.router)
