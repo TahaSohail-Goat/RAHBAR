@@ -30,6 +30,8 @@ SCREENSHOT_CAPTIONS = {
     "E2-coverage": "E2/E4 — live-query coverage before and after six additions",
     "F1-f2-k8s": "F1/F2 — namespace objects, PVC, ConfigMap, CronJob and Jobs",
     "F2-logs": "F2 — completed ingestion and evaluation Job logs",
+    "F2-eval-logs": "F2 — completed evaluation Job log and status",
+    "F3-mismatch": "F3 — 0/1 API pod and live embedding-model mismatch readiness response",
     "F3-f5-release": "F3/F5 — ConfigMap gate change, rollout/undo trace and resource measurements",
 }
 
