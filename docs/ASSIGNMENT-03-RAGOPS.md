@@ -173,7 +173,7 @@ statement. Capture actual output for these six areas:
 5. Live coverage before/after and uncovered-topic groups.
 6. Kubernetes PVC/jobs/candidate Service and promotion/rollback behavior.
 
-Capture the actual terminal, browser, or Kubernetes screen after running the
+Capture the actual terminal screen after running the
 commands; do not submit fabricated terminal content. Roll numbers, group-written
 question claims, and subjective human labels need teammate verification. The
 source intentionally leaves those review actions explicit rather than inventing
@@ -181,8 +181,10 @@ identity or claiming work that was not performed.
 
 The report builder reserves eight main pages and creates one appendix page per
 required screenshot. It includes the Figure 3 lifecycle mapping, five Table 2
-qualities, six short answers, and the five-line trace-only diagnosis. The eleven
+qualities, six short answers, and the five-line trace-only diagnosis. The thirteen
 appendix captures are A1 verification, A2 incremental ingestion, B3 evaluation,
 C2 rejected gate, C2 passing gate, D1 trace, D2 reconstruction, E2/E4 coverage,
-F1/F2 cluster state, F2 Job logs, and F3/F5 threshold/rollback/resources. A
+F1/F2 cluster state, F2 ingestion Job logs, F2 completed evaluation Job logs,
+F3 mismatch pod, and F3/F5 threshold/rollback/resources. Capture uncropped
+terminal output from the team's own cluster. A
 passing-gate capture must wait for genuine human labels and a real passing run.

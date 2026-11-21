@@ -163,7 +163,7 @@ exported as shown in [`docs/ASSIGNMENT-03-RAGOPS.md`](docs/ASSIGNMENT-03-RAGOPS.
 | E — coverage and drift | `make ragops-coverage`; inspect `eval/results/coverage.json`; rerun `make ragops-baseline-job` and `make ragops-eval-job` after Batch B to compare the same golden set against the updated corpus. |
 | F — Kubernetes evidence | `kubectl -n rahbar get all,pvc,configmap,cronjob,job`; `kubectl -n rahbar logs job/batch-b-index`; `kubectl -n rahbar logs job/ragops-eval`; edit a gate threshold with `kubectl -n rahbar edit configmap ragops-gates`, delete/reapply `ragops-gate-check`, and compare its log; `kubectl -n rahbar rollout status deployment/api`; after the rollback exercise use `kubectl -n rahbar rollout undo deployment/api` and verify `/readyz` plus a new trace. |
 
-The screenshot appendix has eleven individually named captures, listed in
+The screenshot appendix has thirteen individually named captures, listed in
 [`docs/ASSIGNMENT-03-RAGOPS.md`](docs/ASSIGNMENT-03-RAGOPS.md). The pass screenshot
 is intentionally unfilled until the team has supplied genuine manual labels and
 the candidate has passed the configured gate.
