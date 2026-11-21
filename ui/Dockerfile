@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged:1.30.6-alpine3.24-slim
+FROM nginxinc/nginx-unprivileged:1.31.7-alpine3.24-slim
 ARG VCS_REF=development
 LABEL org.opencontainers.image.revision=${VCS_REF}
 USER root
