@@ -32,9 +32,9 @@ def main() -> int:
     args.file = confined_path(args.file, (repo_root, data_root))
     if args.save:
         output_root = data_root / "results" if os.environ.get("RAGOPS_DATA_DIR") else repo_root / "eval" / "results"
-        args.out = (output_root / "trace-summary.json").resolve()
+        output_path = (output_root / "trace-summary.json").resolve()
     else:
-        args.out = None
+        output_path = None
     since = datetime.fromisoformat(args.since.replace("Z", "+00:00")) if args.since else None
     until = datetime.fromisoformat(args.until.replace("Z", "+00:00")) if args.until else None
     records = []
@@ -67,12 +67,12 @@ def main() -> int:
         "injection_attempts_flagged": sum(int(row.get("injection_attempts_flagged", 0)) for row in records),
     }
     encoded = json.dumps(report, indent=2) + "\n"
-    if args.out:
-        if not any(args.out == root or root in args.out.parents
+    if output_path:
+        if not any(output_path == root or root in output_path.parents
                    for root in (repo_root.resolve(), data_root.resolve())):
             raise ValueError("trace summary output escaped its allowed directory")
-        args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(encoded, encoding="utf-8")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(encoded, encoding="utf-8")
     print(encoded, end="")
     return 0
 
