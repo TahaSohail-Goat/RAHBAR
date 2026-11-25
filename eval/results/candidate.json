@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "run_id": "20261120T232755577540Z",
-  "created_at": "2026-11-20T23:31:07.690497+00:00",
+  "run_id": "20261125T131348996393Z",
+  "created_at": "2026-11-25T13:17:24.329604+00:00",
   "golden_file": "golden.jsonl",
   "configuration": {
     "collection": "rahbar-candidate",
@@ -24,8 +24,8 @@
       "mean_unrelated_cosine": 0.3726969443082926,
       "gap": 0.41422638826077374
     },
-    "embedding_time_ms_per_text_in_pair_experiment": 6.189,
-    "embedding_time_ms_per_chunk_sampled": 16.501,
+    "embedding_time_ms_per_text_in_pair_experiment": 7.138,
+    "embedding_time_ms_per_chunk_sampled": 19.453,
     "embedding_determinism_max_abs_difference": 0.0,
     "embedding_model": "nomic-embed-text",
     "chunk_sample_count": 32
@@ -38,13 +38,13 @@
     "ndcg@5": 0.8862702023564977,
     "citation_validity": 1,
     "abstention_correctness": 1,
-    "latency_p50_ms": 1297.2,
-    "latency_p95_ms": 2070.9,
+    "latency_p50_ms": 1561.6,
+    "latency_p95_ms": 2525.7,
     "answer_fact_checks": 9,
     "answer_fact_check_count": 12,
-    "faithfulness_human_labels": null,
-    "faithfulness": null,
-    "faithfulness_label_count": 0,
+    "faithfulness_human_labels": 8,
+    "faithfulness": 1.0,
+    "faithfulness_label_count": 8,
     "query_coverage": 0.8928571428571429,
     "query_coverage_before_six": 0.6785714285714286,
     "query_coverage_all_live": 0.575,
@@ -65,7 +65,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q01-9952ffb1",
+          "request_id": "eval-42-q01-6f795e90",
           "answer": "1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2]",
           "citations": [
             {
@@ -126,7 +126,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 2.1661,
+        "seconds": 6.5725,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -148,7 +148,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q02-752b9023",
+          "request_id": "eval-42-q02-2f03c3ad",
           "answer": "1.8 A classroom-teaching hour or one period is of 50 to 60 minutes. [academic-rules-handbook-jun-2026.pdf / 1.8]\nU ndergraduate Academic Rules and Regulations 2026 1 [academic-rules-handbook-jun-2026.pdf / 1.8]",
           "citations": [
             {
@@ -209,7 +209,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0224,
+        "seconds": 1.1794,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -231,7 +231,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q03-eec90c76",
+          "request_id": "eval-42-q03-d575a4a9",
           "answer": "5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs. [academic-rules-handbook-jun-2026.pdf / 5.4]",
           "citations": [
             {
@@ -292,7 +292,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0069,
+        "seconds": 1.0434,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -314,7 +314,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q04-2ed6d6b5",
+          "request_id": "eval-42-q04-05d7568c",
           "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
@@ -375,7 +375,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9806,
+        "seconds": 1.0123,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -397,7 +397,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q05-ac9fe25a",
+          "request_id": "eval-42-q05-4a397a21",
           "answer": "2.2 Interpretation of Letter Grades is as follows: [academic-rules-handbook-jun-2026.pdf / 2.2]\n| Grade | Interpretation | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A+ | Outstanding | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A, A- | Excellent | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| B+, B, B- | Good | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C+, C | Adequate | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C-, D+, D | Pass, the student may repeat the course | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| F | Fail | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| FA | Fail due to shortage of attendance | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| I | Incomplete | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| W | Withdrawn | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| S | Satisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| U | Unsatisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\nU ndergraduate Academic Rules and Regulations 2026 5 [academic-rules-handbook-jun-2026.pdf / 2.2]",
           "citations": [
             {
@@ -458,7 +458,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.6145,
+        "seconds": 1.7495,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -480,7 +480,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q06-3b81bf9d",
+          "request_id": "eval-42-q06-f5fac5ce",
           "answer": "4. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -541,7 +541,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5459,
+        "seconds": 2.1934,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -563,7 +563,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q07-cf78763f",
+          "request_id": "eval-42-q07-80da2f2a",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -624,7 +624,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.193,
+        "seconds": 1.6114,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -645,7 +645,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q08-5651f952",
+          "request_id": "eval-42-q08-ed309c6c",
           "answer": "6.4.4. 6:5; [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nEvaluation criteria for a technical start-up Faculty member must have published one journal paper (at least online with a DOI number), with the impact factor journals appearing in Journal Citation Reports by Web of [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nScience Group (JCR) within two years prior to the date of application with NUCES affiliation. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFaculty member must have completed or currently be involved as a Principal Investi ‘gator or Co-Principal Investigator of an externally funded research project of significant funding amount within the last five years. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should align with the ongoing research at the university and the university degree programs. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should be related to emerging technologies and should be aiming to commercialise the research of faculty members or research projects. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for submitting the application Applications may be submitted at any time. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nApplication must be submitted on the prescribed form (Annex -I) with all the required information. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nA brief business plan must be provided using the form provided in Annex-II. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFollowing information should be provided on the prescribed form: Technical domain of the start-up Research outputs /technologies/products that the start-up aims to commercialize, A _ transfer/commercial usage of Intellectual Property required from the university should be explicitly listed (see Intellectual Property Rights (IP) Policy available at university website). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nList of NUCES faculty members and staff involved in the start-up Applications must be submitted through the campus Director office. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for evaluating the application [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe Campus Director shall provide comments, recommend the application and forward the application to ORIC. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nORIC shall evaluate and recommend the application using the criteria provided in Section 5). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFor final approval, the cases shall be presented to the RECTOR NUCES for approval. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe decision by the RECTOR is final in this regard. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nMandatory periodic (six monthly) deliverables of the start-up Approximate business/funds being generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nNumber of employments created by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nSummary of industry partnerships generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]",
           "citations": [
             {
@@ -706,7 +706,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 2.0709,
+        "seconds": 1.8714,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -728,7 +728,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q09-f3b33e2b",
+          "request_id": "eval-42-q09-aa8343fd",
           "answer": "6. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nRules for Summer Semester [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer semester will be offered as an optional semester of 8 to 9 weeks' duration. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nThe contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nResearch courses or projects will not be offered. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student cannot register for a new course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nException to this rule is granted for the following cases: (1) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudents are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student will be allowed to repeat a maximum of 2 courses (with associated labs if any. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can withdraw from a summer course on or before the last day of classes. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer courses cannot be dropped; hence, fee is neither refunded nor carried forward to next semester(s). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nFinancial assistance, scholarship or fee concession is not available in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA minimum of TEN (10) students should register in a summer course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nWarning Count is incremented/decremented in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can study summer semester in another campus, provided that the parent campus is not offering that course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudent must obtain, in writing, prior permission from Director of the parent campus. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nVisiting faculty shall not be employed during summer semester, except where the course was offered in a regular semester by the same visiting member. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]",
           "citations": [
             {
@@ -780,7 +780,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.2972,
+        "seconds": 1.5616,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -802,7 +802,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q10-8606a773",
+          "request_id": "eval-42-q10-17e64fd3",
           "answer": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. [academic-rules-handbook-jun-2026.pdf / 6.1]\nA. [academic-rules-handbook-jun-2026.pdf / 6.1]\nAcademic Warning I/II B. [academic-rules-handbook-jun-2026.pdf / 6.1]\nGraduating C. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering FYP-I in Fall by earning minimum required credits in the summer D. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering a course/lab in Fall by passing its pre-requisite in summer [academic-rules-handbook-jun-2026.pdf / 6.1]",
           "citations": [
             {
@@ -863,7 +863,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3586,
+        "seconds": 1.7854,
         "recall@3": 0.0,
         "recall@5": 1.0,
         "mrr": 0.25,
@@ -885,7 +885,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q11-44e2d62c",
+          "request_id": "eval-42-q11-6b52f571",
           "answer": "1.22 Failure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nConsequently, the student will be assigned F/A grade in the course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nBachelor’s Degree Requirements [academic-rules-handbook-jun-2026.pdf / 1.22]",
           "citations": [
             {
@@ -946,7 +946,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.2074,
+        "seconds": 1.1995,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -968,7 +968,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q12-42a1b8c5",
+          "request_id": "eval-42-q12-11bbc6e6",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -1029,7 +1029,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9455,
+        "seconds": 1.0301,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1045,7 +1045,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-42-q13-d643b70a",
+          "request_id": "eval-42-q13-102dd467",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -1100,7 +1100,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.8765,
+        "seconds": 0.9746,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -1116,7 +1116,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-42-q14-de7262b4",
+          "request_id": "eval-42-q14-ebf9bf55",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -1171,7 +1171,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6796,
+        "seconds": 0.8761,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -1193,7 +1193,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q15-63c8315b",
+          "request_id": "eval-42-q15-c1f5694e",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -1254,7 +1254,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0325,
+        "seconds": 1.1854,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.3333333333333333,
@@ -1276,7 +1276,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q16-b0256809",
+          "request_id": "eval-42-q16-0e54614f",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -1337,7 +1337,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0052,
+        "seconds": 1.0533,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1359,7 +1359,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q17-990a3366",
+          "request_id": "eval-42-q17-baa0ce69",
           "answer": "1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2]",
           "citations": [
             {
@@ -1420,7 +1420,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5115,
+        "seconds": 1.5984,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1436,7 +1436,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-42-q18-0034c5c9",
+          "request_id": "eval-42-q18-cf7d2acd",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -1491,7 +1491,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6905,
+        "seconds": 1.0927,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -1507,7 +1507,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-42-q19-c2c0d963",
+          "request_id": "eval-42-q19-43e9cfcf",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -1562,7 +1562,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6864,
+        "seconds": 0.9876,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -1578,7 +1578,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-42-q20-e2dd5024",
+          "request_id": "eval-42-q20-714e77d4",
           "answer": "I could not verify a grounded answer. Please try again later.",
           "citations": [],
           "answered_from_context": false,
@@ -1633,7 +1633,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.394,
+        "seconds": 2.1659,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -1655,7 +1655,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q21-63502d66",
+          "request_id": "eval-42-q21-9b3702a9",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -1716,7 +1716,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3494,
+        "seconds": 1.5704,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1738,7 +1738,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q22-6f818a8f",
+          "request_id": "eval-42-q22-3fde79cf",
           "answer": "1. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAttendance Requirement Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars, and discussions as prescribed by the course instructor. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAbsence of a maximum of 20% of the total lectures may be condoned for genuine reasons, such as illness. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements will render a student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Undergraduate degree programs are 80%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Graduate and Post Graduate degree programs are 75%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nConsequently, the student will be assigned F/A grade in the course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]",
           "citations": [
             {
@@ -1799,7 +1799,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7133,
+        "seconds": 1.7916,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1826,7 +1826,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q23-53bf8fc8",
+          "request_id": "eval-42-q23-9568304b",
           "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
@@ -1887,7 +1887,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3952,
+        "seconds": 2.5257,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -1914,7 +1914,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q24-241fc3ee",
+          "request_id": "eval-42-q24-49e107be",
           "answer": "6. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nRules for Summer Semester [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer semester will be offered as an optional semester of 8 to 9 weeks' duration. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nThe contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nResearch courses or projects will not be offered. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student cannot register for a new course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nException to this rule is granted for the following cases: (1) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudents are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student will be allowed to repeat a maximum of 2 courses (with associated labs if any. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can withdraw from a summer course on or before the last day of classes. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer courses cannot be dropped; hence, fee is neither refunded nor carried forward to next semester(s). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nFinancial assistance, scholarship or fee concession is not available in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA minimum of TEN (10) students should register in a summer course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nWarning Count is incremented/decremented in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can study summer semester in another campus, provided that the parent campus is not offering that course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudent must obtain, in writing, prior permission from Director of the parent campus. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nVisiting faculty shall not be employed during summer semester, except where the course was offered in a regular semester by the same visiting member. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]",
           "citations": [
             {
@@ -1957,7 +1957,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3057,
+        "seconds": 1.451,
         "recall@3": 0.5,
         "recall@5": 0.5,
         "mrr": 1.0,
@@ -1979,7 +1979,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q25-1933bcbb",
+          "request_id": "eval-42-q25-bd6f305f",
           "answer": "4. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and often do, reproduce inherent biases in provision of information, and they often do not accurately state the sources from which the content provided has been gathered. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt is therefore vital that students use academic and trusted disciplinary- specific sources when developing their work. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nNone of the content generated by AI should be used in submitted work unless it is quoted and referenced as such. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAI is at its best when it is used to help synthesize ideas, so that users are in a better position to write an assignment. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt may be helpful for students to consider Generative AI tools in a similar light to Wikipedia: as a source of information, but not always a reliable one. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nSee some potentially acceptable uses of Generative AI here. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nPlease note, this list is not exhaustive and is indicative only. 1) Initial research into a topic, idea, or concept to gain an overview for example: “what are the main ethical concerns for students when using generative artificial intelligence tools?” [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -2040,7 +2040,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7137,
+        "seconds": 2.1496,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2059,13 +2059,13 @@
     "ndcg@5": 0.8862702023564977,
     "citation_validity": 1,
     "abstention_correctness": 0.96,
-    "latency_p50_ms": 1192.3,
-    "latency_p95_ms": 1835.2,
+    "latency_p50_ms": 1369.1,
+    "latency_p95_ms": 1982.3,
     "answer_fact_checks": 9,
     "answer_fact_check_count": 12,
-    "faithfulness_human_labels": null,
-    "faithfulness": null,
-    "faithfulness_label_count": 0,
+    "faithfulness_human_labels": 8,
+    "faithfulness": 1.0,
+    "faithfulness_label_count": 8,
     "query_coverage": 0.8928571428571429,
     "query_coverage_before_six": 0.6785714285714286,
     "query_coverage_all_live": 0.575,
@@ -2086,7 +2086,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q01-221e1f13",
+          "request_id": "eval-43-q01-71d204d8",
           "answer": "1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2]",
           "citations": [
             {
@@ -2147,7 +2147,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.6237,
+        "seconds": 1.8262,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2169,7 +2169,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q02-95c370e6",
+          "request_id": "eval-43-q02-7b32f978",
           "answer": "1.8 A classroom-teaching hour or one period is of 50 to 60 minutes. [academic-rules-handbook-jun-2026.pdf / 1.8]\nU ndergraduate Academic Rules and Regulations 2026 1 [academic-rules-handbook-jun-2026.pdf / 1.8]",
           "citations": [
             {
@@ -2230,7 +2230,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0324,
+        "seconds": 1.0478,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2252,7 +2252,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q03-b53dec4b",
+          "request_id": "eval-43-q03-f6f468cf",
           "answer": "5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs. [academic-rules-handbook-jun-2026.pdf / 5.4]",
           "citations": [
             {
@@ -2313,7 +2313,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0142,
+        "seconds": 1.1068,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2335,7 +2335,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q04-d7da585f",
+          "request_id": "eval-43-q04-be06ceed",
           "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
@@ -2396,7 +2396,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9726,
+        "seconds": 1.1563,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2418,7 +2418,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q05-c79c0a21",
+          "request_id": "eval-43-q05-5248115c",
           "answer": "2.2 Interpretation of Letter Grades is as follows: [academic-rules-handbook-jun-2026.pdf / 2.2]\n| Grade | Interpretation | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A+ | Outstanding | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A, A- | Excellent | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| B+, B, B- | Good | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C+, C | Adequate | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C-, D+, D | Pass, the student may repeat the course | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| F | Fail | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| FA | Fail due to shortage of attendance | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| I | Incomplete | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| W | Withdrawn | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| S | Satisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| U | Unsatisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\nU ndergraduate Academic Rules and Regulations 2026 5 [academic-rules-handbook-jun-2026.pdf / 2.2]",
           "citations": [
             {
@@ -2479,7 +2479,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7092,
+        "seconds": 1.8288,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2501,7 +2501,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q06-8e23196b",
+          "request_id": "eval-43-q06-43f192c1",
           "answer": "4. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -2562,7 +2562,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5273,
+        "seconds": 1.5343,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2584,7 +2584,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q07-40359dd2",
+          "request_id": "eval-43-q07-00d379cb",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -2645,7 +2645,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.1483,
+        "seconds": 1.3762,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -2666,7 +2666,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q08-6efd60cd",
+          "request_id": "eval-43-q08-27b700dc",
           "answer": "6.4.4. 6:5; [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nEvaluation criteria for a technical start-up Faculty member must have published one journal paper (at least online with a DOI number), with the impact factor journals appearing in Journal Citation Reports by Web of [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nScience Group (JCR) within two years prior to the date of application with NUCES affiliation. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFaculty member must have completed or currently be involved as a Principal Investi ‘gator or Co-Principal Investigator of an externally funded research project of significant funding amount within the last five years. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should align with the ongoing research at the university and the university degree programs. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should be related to emerging technologies and should be aiming to commercialise the research of faculty members or research projects. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for submitting the application Applications may be submitted at any time. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nApplication must be submitted on the prescribed form (Annex -I) with all the required information. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nA brief business plan must be provided using the form provided in Annex-II. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFollowing information should be provided on the prescribed form: Technical domain of the start-up Research outputs /technologies/products that the start-up aims to commercialize, A _ transfer/commercial usage of Intellectual Property required from the university should be explicitly listed (see Intellectual Property Rights (IP) Policy available at university website). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nList of NUCES faculty members and staff involved in the start-up Applications must be submitted through the campus Director office. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for evaluating the application [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe Campus Director shall provide comments, recommend the application and forward the application to ORIC. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nORIC shall evaluate and recommend the application using the criteria provided in Section 5). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFor final approval, the cases shall be presented to the RECTOR NUCES for approval. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe decision by the RECTOR is final in this regard. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nMandatory periodic (six monthly) deliverables of the start-up Approximate business/funds being generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nNumber of employments created by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nSummary of industry partnerships generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]",
           "citations": [
             {
@@ -2727,7 +2727,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3457,
+        "seconds": 1.4974,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2749,7 +2749,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q09-04b36cef",
+          "request_id": "eval-43-q09-5b8a0d20",
           "answer": "6. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nRules for Summer Semester [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer semester will be offered as an optional semester of 8 to 9 weeks' duration. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nThe contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nResearch courses or projects will not be offered. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student cannot register for a new course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nException to this rule is granted for the following cases: (1) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudents are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student will be allowed to repeat a maximum of 2 courses (with associated labs if any. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can withdraw from a summer course on or before the last day of classes. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer courses cannot be dropped; hence, fee is neither refunded nor carried forward to next semester(s). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nFinancial assistance, scholarship or fee concession is not available in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA minimum of TEN (10) students should register in a summer course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nWarning Count is incremented/decremented in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can study summer semester in another campus, provided that the parent campus is not offering that course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudent must obtain, in writing, prior permission from Director of the parent campus. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nVisiting faculty shall not be employed during summer semester, except where the course was offered in a regular semester by the same visiting member. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]",
           "citations": [
             {
@@ -2801,7 +2801,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.2941,
+        "seconds": 1.4061,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -2823,7 +2823,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q10-e04aea0e",
+          "request_id": "eval-43-q10-562b4ed6",
           "answer": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. [academic-rules-handbook-jun-2026.pdf / 6.1]\nA. [academic-rules-handbook-jun-2026.pdf / 6.1]\nAcademic Warning I/II B. [academic-rules-handbook-jun-2026.pdf / 6.1]\nGraduating C. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering FYP-I in Fall by earning minimum required credits in the summer D. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering a course/lab in Fall by passing its pre-requisite in summer [academic-rules-handbook-jun-2026.pdf / 6.1]",
           "citations": [
             {
@@ -2884,7 +2884,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3399,
+        "seconds": 1.5203,
         "recall@3": 0.0,
         "recall@5": 1.0,
         "mrr": 0.25,
@@ -2906,7 +2906,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q11-9dcd7391",
+          "request_id": "eval-43-q11-0aab3f7a",
           "answer": "1.22 Failure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nConsequently, the student will be assigned F/A grade in the course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nBachelor’s Degree Requirements [academic-rules-handbook-jun-2026.pdf / 1.22]",
           "citations": [
             {
@@ -2967,7 +2967,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.1923,
+        "seconds": 1.3691,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -2989,7 +2989,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q12-2430b1e3",
+          "request_id": "eval-43-q12-32dc4693",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -3050,7 +3050,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.082,
+        "seconds": 1.1291,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3066,7 +3066,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-43-q13-57ae324a",
+          "request_id": "eval-43-q13-93d4dd18",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -3121,7 +3121,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.8829,
+        "seconds": 0.9443,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -3137,7 +3137,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-43-q14-01822afb",
+          "request_id": "eval-43-q14-07f9ce0b",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -3192,7 +3192,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6557,
+        "seconds": 0.9143,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -3214,7 +3214,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q15-6d29b82c",
+          "request_id": "eval-43-q15-468522f4",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -3275,7 +3275,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0091,
+        "seconds": 1.1188,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.3333333333333333,
@@ -3297,7 +3297,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q16-f4ef25be",
+          "request_id": "eval-43-q16-3a8e881a",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -3358,7 +3358,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.0169,
+        "seconds": 1.1302,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3380,7 +3380,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q17-c2245624",
+          "request_id": "eval-43-q17-76894106",
           "answer": "1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2]",
           "citations": [
             {
@@ -3441,7 +3441,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.4417,
+        "seconds": 1.6376,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3457,7 +3457,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-43-q18-299427c9",
+          "request_id": "eval-43-q18-91a4b54b",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -3512,7 +3512,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6819,
+        "seconds": 0.7913,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -3528,7 +3528,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-43-q19-09e9d620",
+          "request_id": "eval-43-q19-d4a1c999",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -3583,7 +3583,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.6768,
+        "seconds": 1.2429,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -3599,7 +3599,7 @@
         "hard": false,
         "relevant": [],
         "response": {
-          "request_id": "eval-43-q20-a30c0ce5",
+          "request_id": "eval-43-q20-70854989",
           "answer": "I could not verify a grounded answer. Please try again later.",
           "citations": [],
           "answered_from_context": false,
@@ -3654,7 +3654,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.8352,
+        "seconds": 1.9823,
         "recall@3": null,
         "recall@5": null,
         "mrr": null,
@@ -3676,7 +3676,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q21-62ca75b0",
+          "request_id": "eval-43-q21-9176d912",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -3737,7 +3737,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.2161,
+        "seconds": 1.3481,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3759,7 +3759,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q22-6374b4dc",
+          "request_id": "eval-43-q22-7c58baa6",
           "answer": "1. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAttendance Requirement Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars, and discussions as prescribed by the course instructor. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAbsence of a maximum of 20% of the total lectures may be condoned for genuine reasons, such as illness. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements will render a student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Undergraduate degree programs are 80%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Graduate and Post Graduate degree programs are 75%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nConsequently, the student will be assigned F/A grade in the course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]",
           "citations": [
             {
@@ -3820,7 +3820,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7161,
+        "seconds": 1.9955,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3847,7 +3847,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q23-944cd829",
+          "request_id": "eval-43-q23-48943862",
           "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
@@ -3908,7 +3908,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5654,
+        "seconds": 1.679,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -3935,7 +3935,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q24-d078c9fd",
+          "request_id": "eval-43-q24-3140da7d",
           "answer": "The available corpus does not contain enough evidence to answer this question.",
           "citations": [],
           "answered_from_context": false,
@@ -3972,7 +3972,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.1331,
+        "seconds": 1.365,
         "recall@3": 0.5,
         "recall@5": 0.5,
         "mrr": 1.0,
@@ -3994,7 +3994,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-43-q25-eeedbb81",
+          "request_id": "eval-43-q25-0e2a9537",
           "answer": "4. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and often do, reproduce inherent biases in provision of information, and they often do not accurately state the sources from which the content provided has been gathered. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt is therefore vital that students use academic and trusted disciplinary- specific sources when developing their work. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nNone of the content generated by AI should be used in submitted work unless it is quoted and referenced as such. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAI is at its best when it is used to help synthesize ideas, so that users are in a better position to write an assignment. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt may be helpful for students to consider Generative AI tools in a similar light to Wikipedia: as a source of information, but not always a reliable one. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nSee some potentially acceptable uses of Generative AI here. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nPlease note, this list is not exhaustive and is indicative only. 1) Initial research into a topic, idea, or concept to gain an overview for example: “what are the main ethical concerns for students when using generative artificial intelligence tools?” [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -4055,7 +4055,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 2.1704,
+        "seconds": 1.7865,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4074,9 +4074,9 @@
     "ndcg@5": 0.8591449286659908,
     "citation_validity": 1,
     "abstention_correctness": 0.95,
-    "latency_p50_ms": 1394.1,
-    "latency_p95_ms": 1823.4,
-    "answer_fact_checks": 6,
+    "latency_p50_ms": 1491.8,
+    "latency_p95_ms": 1968.8,
+    "answer_fact_checks": 7,
     "answer_fact_check_count": 12,
     "faithfulness_human_labels": null,
     "rows": [
@@ -4093,7 +4093,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q01-41a07eb2",
+          "request_id": "eval-42-q01-0079e4ee",
           "answer": "1.2 Academic Year of the University starts in August/September and ends in May/June of the subsequent year. [academic-rules-handbook-jun-2026.pdf / 1.2]",
           "citations": [
             {
@@ -4154,7 +4154,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.6408,
+        "seconds": 1.7836,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4176,7 +4176,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q02-b200424b",
+          "request_id": "eval-42-q02-33a5279f",
           "answer": "1.8 A classroom-teaching hour or one period is of 50 to 60 minutes. [academic-rules-handbook-jun-2026.pdf / 1.8]\nU ndergraduate Academic Rules and Regulations 2026 1 [academic-rules-handbook-jun-2026.pdf / 1.8]",
           "citations": [
             {
@@ -4237,7 +4237,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9826,
+        "seconds": 1.1181,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4259,7 +4259,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q03-caecda66",
+          "request_id": "eval-42-q03-464cb062",
           "answer": "5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs. [academic-rules-handbook-jun-2026.pdf / 5.4]",
           "citations": [
             {
@@ -4320,7 +4320,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5535,
+        "seconds": 1.5445,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4342,13 +4342,13 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q04-729ccbae",
-          "answer": "4. [prospectus-2026-academic-rules-and-regulations.pdf / 4. Semester Course Load]\nSemester Course Load Each course is assigned credit hours. [prospectus-2026-academic-rules-and-regulations.pdf / 4. Semester Course Load]\nFor theory courses 1 credit hour means 1 hour of lecturing per week, while for lab courses 1 credit hour means 3 hours of lab- work per week. [prospectus-2026-academic-rules-and-regulations.pdf / 4. Semester Course Load]\nFor example, a 3+1 credit hour course carries 3 hours of lectures and 3 hours of lab- work per week. [prospectus-2026-academic-rules-and-regulations.pdf / 4. Semester Course Load]\nNormal course load for undergraduate students is as prescribed in the study plan. [prospectus-2026-academic-rules-and-regulations.pdf / 4. Semester Course Load]",
+          "request_id": "eval-42-q04-745a59c3",
+          "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
-              "source": "prospectus-2026-academic-rules-and-regulations.pdf",
-              "section": "4. Semester Course Load",
-              "page": 1
+              "source": "academic-rules-handbook-jun-2026.pdf",
+              "section": "1.10",
+              "page": 8
             }
           ],
           "answered_from_context": true,
@@ -4403,14 +4403,14 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.8234,
+        "seconds": 1.6232,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
         "ndcg@5": 1.0,
         "citation_valid": true,
         "abstention_correct": true,
-        "required_facts_pass": false
+        "required_facts_pass": true
       },
       {
         "id": "q05",
@@ -4425,7 +4425,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q05-b6ddea67",
+          "request_id": "eval-42-q05-9f26c57b",
           "answer": "2.2 Interpretation of Letter Grades is as follows: [academic-rules-handbook-jun-2026.pdf / 2.2]\n| Grade | Interpretation | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A+ | Outstanding | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| A, A- | Excellent | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| B+, B, B- | Good | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C+, C | Adequate | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| C-, D+, D | Pass, the student may repeat the course | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| F | Fail | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| FA | Fail due to shortage of attendance | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| I | Incomplete | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| W | Withdrawn | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| S | Satisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\n| U | Unsatisfactory | [academic-rules-handbook-jun-2026.pdf / 2.2]\nU ndergraduate Academic Rules and Regulations 2026 5 [academic-rules-handbook-jun-2026.pdf / 2.2]",
           "citations": [
             {
@@ -4486,7 +4486,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.4726,
+        "seconds": 1.5491,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4508,7 +4508,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q06-8c1ce14d",
+          "request_id": "eval-42-q06-d9c54d65",
           "answer": "4. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and [student-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -4569,7 +4569,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3941,
+        "seconds": 1.4918,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4591,7 +4591,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q07-ccae8d08",
+          "request_id": "eval-42-q07-100db7e4",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -4652,7 +4652,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.1945,
+        "seconds": 1.2519,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -4673,7 +4673,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q08-a688c1cf",
+          "request_id": "eval-42-q08-1f2e9b14",
           "answer": "6.4.4. 6:5; [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nEvaluation criteria for a technical start-up Faculty member must have published one journal paper (at least online with a DOI number), with the impact factor journals appearing in Journal Citation Reports by Web of [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nScience Group (JCR) within two years prior to the date of application with NUCES affiliation. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFaculty member must have completed or currently be involved as a Principal Investi ‘gator or Co-Principal Investigator of an externally funded research project of significant funding amount within the last five years. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should align with the ongoing research at the university and the university degree programs. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe start-up should be related to emerging technologies and should be aiming to commercialise the research of faculty members or research projects. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for submitting the application Applications may be submitted at any time. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nApplication must be submitted on the prescribed form (Annex -I) with all the required information. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nA brief business plan must be provided using the form provided in Annex-II. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFollowing information should be provided on the prescribed form: Technical domain of the start-up Research outputs /technologies/products that the start-up aims to commercialize, A _ transfer/commercial usage of Intellectual Property required from the university should be explicitly listed (see Intellectual Property Rights (IP) Policy available at university website). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nList of NUCES faculty members and staff involved in the start-up Applications must be submitted through the campus Director office. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nProcedure for evaluating the application [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe Campus Director shall provide comments, recommend the application and forward the application to ORIC. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nORIC shall evaluate and recommend the application using the criteria provided in Section 5). [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nFor final approval, the cases shall be presented to the RECTOR NUCES for approval. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nThe decision by the RECTOR is final in this regard. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nMandatory periodic (six monthly) deliverables of the start-up Approximate business/funds being generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nNumber of employments created by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]\nSummary of industry partnerships generated by the start-up. [faculty-entrepreneurship-and-technical-start-ups-policy.pdf / 1. Purpose]",
           "citations": [
             {
@@ -4734,7 +4734,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.761,
+        "seconds": 1.8223,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4756,7 +4756,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q09-ffaf6f44",
+          "request_id": "eval-42-q09-89e51a2c",
           "answer": "6. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nRules for Summer Semester [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer semester will be offered as an optional semester of 8 to 9 weeks' duration. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nThe contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nResearch courses or projects will not be offered. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student cannot register for a new course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nException to this rule is granted for the following cases: (1) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudents are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student will be allowed to repeat a maximum of 2 courses (with associated labs if any. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can withdraw from a summer course on or before the last day of classes. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer courses cannot be dropped; hence, fee is neither refunded nor carried forward to next semester(s). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nFinancial assistance, scholarship or fee concession is not available in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA minimum of TEN (10) students should register in a summer course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nWarning Count is incremented/decremented in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can study summer semester in another campus, provided that the parent campus is not offering that course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudent must obtain, in writing, prior permission from Director of the parent campus. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nVisiting faculty shall not be employed during summer semester, except where the course was offered in a regular semester by the same visiting member. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]",
           "citations": [
             {
@@ -4808,7 +4808,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.314,
+        "seconds": 1.3637,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -4830,7 +4830,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q10-db32e21d",
+          "request_id": "eval-42-q10-6c9799cd",
           "answer": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. [academic-rules-handbook-jun-2026.pdf / 6.1]\nA. [academic-rules-handbook-jun-2026.pdf / 6.1]\nAcademic Warning I/II B. [academic-rules-handbook-jun-2026.pdf / 6.1]\nGraduating C. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering FYP-I in Fall by earning minimum required credits in the summer D. [academic-rules-handbook-jun-2026.pdf / 6.1]\nEligible for registering a course/lab in Fall by passing its pre-requisite in summer [academic-rules-handbook-jun-2026.pdf / 6.1]",
           "citations": [
             {
@@ -4891,7 +4891,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3936,
+        "seconds": 1.4211,
         "recall@3": 0.0,
         "recall@5": 1.0,
         "mrr": 0.25,
@@ -4913,7 +4913,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q11-2dd2b88f",
+          "request_id": "eval-42-q11-495153ca",
           "answer": "1.22 Failure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nConsequently, the student will be assigned F/A grade in the course. [academic-rules-handbook-jun-2026.pdf / 1.22]\nBachelor’s Degree Requirements [academic-rules-handbook-jun-2026.pdf / 1.22]",
           "citations": [
             {
@@ -4974,7 +4974,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.1369,
+        "seconds": 1.2284,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 0.5,
@@ -4996,7 +4996,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q12-9b75a0c2",
+          "request_id": "eval-42-q12-277a7936",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -5057,7 +5057,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9978,
+        "seconds": 1.0473,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5079,7 +5079,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q15-5c08c4ab",
+          "request_id": "eval-42-q15-f1f30d40",
           "answer": "Please restate the full policy question so I can identify the relevant evidence.",
           "citations": [],
           "answered_from_context": false,
@@ -5110,7 +5110,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q16-49cf112d",
+          "request_id": "eval-42-q16-44191439",
           "answer": "1.23 The minimum duration of a Bachelor’s degree is four academic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies. [academic-rules-handbook-jun-2026.pdf / 1.23]",
           "citations": [
             {
@@ -5171,7 +5171,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 0.9767,
+        "seconds": 1.0236,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5193,7 +5193,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q17-4dd11565",
+          "request_id": "eval-42-q17-807a461a",
           "answer": "3.3 New admissions in undergraduate programs are normally conducted once in an academic year, that is, before the commencement of Fall semester. [academic-rules-handbook-jun-2026.pdf / 3.3]",
           "citations": [
             {
@@ -5254,7 +5254,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 2.1913,
+        "seconds": 2.1872,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5276,7 +5276,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q21-d0bb5ac1",
+          "request_id": "eval-42-q21-9ffc2ed4",
           "answer": "1.21 Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars and discussions as prescribed by the course instructor. [academic-rules-handbook-jun-2026.pdf / 1.21]\nAbsence of a maximum of 20% of the total attendance may be condoned by the HoD for genuine reasons, such as illness, etc. [academic-rules-handbook-jun-2026.pdf / 1.21]",
           "citations": [
             {
@@ -5337,7 +5337,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7281,
+        "seconds": 1.9688,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5359,7 +5359,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q22-74ec9cac",
+          "request_id": "eval-42-q22-a0f334c2",
           "answer": "1. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAttendance Requirement Students are required to maintain 100% attendance in lectures, labs, tutorials, seminars, and discussions as prescribed by the course instructor. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nAbsence of a maximum of 20% of the total lectures may be condoned for genuine reasons, such as illness. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements will render a student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Undergraduate degree programs are 80%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nMinimum attendance requirement for Graduate and Post Graduate degree programs are 75%. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nFailure to meet attendance requirements in a course will render the student ineligible to appear in the final examination of the concerned course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]\nConsequently, the student will be assigned F/A grade in the course. [prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement]",
           "citations": [
             {
@@ -5420,7 +5420,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.5583,
+        "seconds": 1.6191,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5447,7 +5447,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q23-4150ed61",
+          "request_id": "eval-42-q23-13693ca2",
           "answer": "1.10 A lab or workshop is normally assigned 1 or 2 credit hours. [academic-rules-handbook-jun-2026.pdf / 1.10]",
           "citations": [
             {
@@ -5508,7 +5508,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.8069,
+        "seconds": 1.8299,
         "recall@3": 0.5,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5535,7 +5535,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q24-8d3f1e36",
+          "request_id": "eval-42-q24-849d4c81",
           "answer": "6. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nRules for Summer Semester [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer semester will be offered as an optional semester of 8 to 9 weeks' duration. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nThe contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nResearch courses or projects will not be offered. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student cannot register for a new course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nException to this rule is granted for the following cases: (1) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudents are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student will be allowed to repeat a maximum of 2 courses (with associated labs if any. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can withdraw from a summer course on or before the last day of classes. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nSummer courses cannot be dropped; hence, fee is neither refunded nor carried forward to next semester(s). [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nFinancial assistance, scholarship or fee concession is not available in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA minimum of TEN (10) students should register in a summer course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nWarning Count is incremented/decremented in summer semester. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nA student can study summer semester in another campus, provided that the parent campus is not offering that course. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nStudent must obtain, in writing, prior permission from Director of the parent campus. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]\nVisiting faculty shall not be employed during summer semester, except where the course was offered in a regular semester by the same visiting member. [undergraduate-academic-rules-aug-2023.pdf / 6. Rules for Summer Semester]",
           "citations": [
             {
@@ -5578,7 +5578,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.3269,
+        "seconds": 1.3902,
         "recall@3": 0.5,
         "recall@5": 0.5,
         "mrr": 1.0,
@@ -5600,7 +5600,7 @@
           }
         ],
         "response": {
-          "request_id": "eval-42-q25-69fe7d7a",
+          "request_id": "eval-42-q25-a36f1540",
           "answer": "4. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAcceptable Uses of Generative AI Tools In general, using Generative AI tools for preparatory research work, assignment and project is considered acceptable practice, however such tools should never be the only source of information used. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nGenerative AI tools are not academic sources; they do not produce fact- checked content, and they can, and often do, reproduce inherent biases in provision of information, and they often do not accurately state the sources from which the content provided has been gathered. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt is therefore vital that students use academic and trusted disciplinary- specific sources when developing their work. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nNone of the content generated by AI should be used in submitted work unless it is quoted and referenced as such. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nAI is at its best when it is used to help synthesize ideas, so that users are in a better position to write an assignment. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nIt may be helpful for students to consider Generative AI tools in a similar light to Wikipedia: as a source of information, but not always a reliable one. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nSee some potentially acceptable uses of Generative AI here. [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]\nPlease note, this list is not exhaustive and is indicative only. 1) Initial research into a topic, idea, or concept to gain an overview for example: “what are the main ethical concerns for students when using generative artificial intelligence tools?” [academic-rules-handbook-jun-2026.pdf / 4. Acceptable Uses of Generative AI Tools]",
           "citations": [
             {
@@ -5661,7 +5661,7 @@
           "provider": "ollama",
           "cached": false
         },
-        "seconds": 1.7271,
+        "seconds": 1.7656,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "mrr": 1.0,
@@ -5967,7 +5967,7 @@
   "cache_probe": {
     "question_id": "q01",
     "statuses": [
-      "miss",
+      "hit",
       "hit"
     ],
     "hit_observed": true,
@@ -5980,8 +5980,8 @@
     "ndcg@5": 0.0,
     "citation_validity": 0.0,
     "abstention_correctness": -0.04,
-    "latency_p50_ms": -104.9,
-    "latency_p95_ms": -235.7
+    "latency_p50_ms": -192.5,
+    "latency_p95_ms": -543.4
   },
-  "faithfulness_review": "pending: complete /var/lib/rahbar/reviews/faithfulness_review.csv for at least 8 answers"
+  "faithfulness_review": "complete: 8 human judgments recorded"
 }
