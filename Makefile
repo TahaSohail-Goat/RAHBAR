@@ -105,7 +105,7 @@ ragops-suite: ## run all three evaluation levels twice and save a timestamped JS
 	"$(BIN)/python" -m eval.assignment3.runner
 
 ragops-coverage: ## measure 40-query golden coverage before/after the six new questions
-	"$(BIN)/python" -m eval.assignment3.coverage
+	"$(BIN)/python" -m eval.assignment3.coverage > eval/results/coverage.json
 
 ragops-traces: ## summarize durable query traces for an optional time window
 	"$(BIN)/python" -m eval.assignment3.trace_summary $(if $(SINCE),--since "$(SINCE)") $(if $(UNTIL),--until "$(UNTIL)")
