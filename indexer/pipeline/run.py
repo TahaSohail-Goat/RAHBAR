@@ -66,7 +66,7 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
             if relative.is_absolute() or ".." in relative.parts:
                 continue
             path = (root / relative).resolve()
-            if path.is_relative_to(resolved_root) and path.is_file():
+            if path.is_relative_to(resolved_root) and path.is_file():  # NOSONAR: contained manifest entries need an existence check to skip stale records.
                 found.append((path, str(entry.get("doc_version", "unknown")),
                               bool(entry.get("superseded", False))))
                 indexed.add(path.resolve())

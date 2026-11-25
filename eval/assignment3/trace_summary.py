@@ -30,7 +30,10 @@ def main() -> int:
     data_root = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar"))
     args.file = confined_path(args.file, (repo_root, data_root))
     if args.out is not None:
-        args.out = confined_path(args.out, (repo_root, data_root))
+        args.out = args.out.resolve()
+        if not any(args.out == root or root in args.out.parents
+                   for root in (repo_root.resolve(), data_root.resolve())):
+            raise ValueError("trace summary output must remain inside an allowed data root")
     since = datetime.fromisoformat(args.since.replace("Z", "+00:00")) if args.since else None
     until = datetime.fromisoformat(args.until.replace("Z", "+00:00")) if args.until else None
     records = []
@@ -64,6 +67,9 @@ def main() -> int:
     }
     encoded = json.dumps(report, indent=2) + "\n"
     if args.out:
+        if not any(args.out == root or root in args.out.parents
+                   for root in (repo_root.resolve(), data_root.resolve())):
+            raise ValueError("trace summary output escaped its allowed directory")
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(encoded, encoding="utf-8")
     print(encoded, end="")

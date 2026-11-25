@@ -29,19 +29,19 @@ def confined_report_path(path: Path) -> Path:
 
 
 SCREENSHOT_CAPTIONS = {
-    "A1-verification": "A1 — Batch B verification report with each check and its reasons",
-    "A2-incremental": "A2 — unchanged ingestion run with zero chunks embedded",
-    "B3-evaluation": "B3 — module, retrieval and end-to-end evaluation summary",
-    "C2-reject": "C2 — candidate blocked by the release gate",
-    "C2-pass": "C2 — passing release gate after completed human review",
-    "D1-trace": "D1 — one complete JSON trace record",
-    "D2-reconstruct": "D2 — trace command rebuilding the exact prompt and context",
-    "E2-coverage": "E2/E4 — live-query coverage before and after six additions",
-    "F1-f2-k8s": "F1/F2 — namespace objects, PVC, ConfigMap, CronJob and Jobs",
-    "F2-logs": "F2 — completed ingestion and evaluation Job logs",
-    "F2-eval-logs": "F2 — completed evaluation Job log and status",
-    "F3-mismatch": "F3 — 0/1 API pod and live embedding-model mismatch readiness response",
-    "F3-f5-release": "F3/F5 — ConfigMap gate change, rollout/undo trace and resource measurements",
+    "A1-verification": "A1 - Batch B verification report with each check and its reasons",
+    "A2-incremental": "A2 - unchanged ingestion run with zero chunks embedded",
+    "B3-evaluation": "B3 - module, retrieval and end-to-end evaluation summary",
+    "C2-reject": "C2 - candidate blocked by the release gate",
+    "C2-pass": "C2 - passing release gate after completed human review",
+    "D1-trace": "D1 - one complete JSON trace record",
+    "D2-reconstruct": "D2 - trace command rebuilding the exact prompt and context",
+    "E2-coverage": "E2/E4 - live-query coverage before and after six additions",
+    "F1-f2-k8s": "F1/F2 - namespace objects, PVC, ConfigMap, CronJob and Jobs",
+    "F2-logs": "F2 - completed ingestion and evaluation Job logs",
+    "F2-eval-logs": "F2 - completed evaluation Job log and status",
+    "F3-mismatch": "F3 - 0/1 API pod and live embedding-model mismatch readiness response",
+    "F3-f5-release": "F3/F5 - ConfigMap gate change, rollout/undo trace and resource measurements",
 }
 
 
@@ -67,7 +67,11 @@ def cell(text: Any) -> Paragraph:
 
 
 def table(data: list[list[Any]], widths: list[float] | None = None) -> Table:
-    rendered = [[cell(value) for value in row] for row in data]
+    body_style = getSampleStyleSheet()["BodyText"]
+    header_style = ParagraphStyle("HeaderCell", parent=body_style, textColor=colors.white,
+                                  fontName="Helvetica-Bold")
+    rendered = [[Paragraph(str(value), header_style if row_index == 0 else body_style)
+                 for value in row] for row_index, row in enumerate(data)]
     result = Table(rendered, colWidths=widths, repeatRows=1, hAlign="LEFT")
     result.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#15324b")),
@@ -87,7 +91,10 @@ def table(data: list[list[Any]], widths: list[float] | None = None) -> Table:
 def compact_table(data: list[list[Any]], widths: list[float]) -> Table:
     style = ParagraphStyle("CompactCell", parent=getSampleStyleSheet()["BodyText"],
                            fontSize=7.4, leading=8.5, spaceAfter=0)
-    rendered = [[Paragraph(str(value), style) for value in row] for row in data]
+    header_style = ParagraphStyle("CompactHeaderCell", parent=style, textColor=colors.white,
+                                  fontName="Helvetica-Bold")
+    rendered = [[Paragraph(str(value), header_style if row_index == 0 else style)
+                 for value in row] for row_index, row in enumerate(data)]
     result = Table(rendered, colWidths=widths, repeatRows=1, hAlign="LEFT")
     result.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#15324b")),
@@ -153,12 +160,18 @@ def resource_observation(path: Path) -> str:
 
 
 def build(args: argparse.Namespace) -> None:
+    repo_root = REPO.resolve()
     for name in ("baseline", "candidate", "verification", "ingestion", "coverage", "gate",
                  "human_review", "root_cause", "resource_usage", "screenshots", "out"):
         value = getattr(args, name, None)
         if value is not None:
-            setattr(args, name, confined_report_path(value))
+            resolved = Path(value).resolve()
+            if resolved != repo_root and repo_root not in resolved.parents:
+                raise ValueError(f"report paths must remain inside the repository: {value}")
+            setattr(args, name, resolved)
     output = args.out
+    if output != repo_root and repo_root not in output.parents:
+        raise ValueError("report output must remain inside the repository")
     output.parent.mkdir(parents=True, exist_ok=True)
     baseline = read_json(args.baseline)
     candidate = read_json(args.candidate)
@@ -201,7 +214,7 @@ def build(args: argparse.Namespace) -> None:
 
     # Main report: eight deliberately bounded pages. Screenshots follow as appendix.
     story += [Spacer(1, 23 * mm), Paragraph("RAHBAR", styles["Cover"]),
-              Paragraph("Assignment 03 — RAGOps", styles["Cover"]), Spacer(1, 8 * mm),
+              Paragraph("Assignment 03 - RAGOps", styles["Cover"]), Spacer(1, 8 * mm),
               Paragraph("Software Construction and Development", styles["Heading2"]),
               Spacer(1, 7 * mm), table([
                   ["Team member", "Roll number"],
@@ -221,13 +234,13 @@ def build(args: argparse.Namespace) -> None:
                      gate_result.get("decision", "not measured")]],
                    [39 * mm, 34 * mm, 30 * mm, 35 * mm]),
               Spacer(1, 5 * mm),
-              Paragraph("Contribution areas below are based on the team’s supplied split; shared "
+              Paragraph("Contribution areas below are based on the team's supplied split; shared "
                         f"coverage and drift work is identified for both members. The review log records "
                         f"{review_counts[0]} group-authored questions and "
                         f"{review_counts[1]} member-reviewed synthetic questions; all eight "
                         "faithfulness judgments are complete.", styles["Small"]), PageBreak()]
 
-    story += [Paragraph("A — Document management", styles["Section"]),
+    story += [Paragraph("A - Document management", styles["Section"]),
               Paragraph("Documents are checked after extraction and before chunking. Quality, "
                         "required metadata/page count, recency and uniqueness are recorded for "
                         "each source. Exact and embedding-near duplicates are quarantined; "
@@ -250,7 +263,7 @@ def build(args: argparse.Namespace) -> None:
                         "metadata, a paired newer edition, a planted instruction and three "
                         "irrelevant documents. See the appended verification screenshot.", styles["Small"]), PageBreak()]
 
-    story += [Paragraph("B — Evaluation", styles["Section"]),
+    story += [Paragraph("B - Evaluation", styles["Section"]),
               Paragraph("The golden set contains answerable, abstention and difficult questions. "
                         "The runner executes the module, retrieval and end-to-end levels twice "
                         "with recorded model settings and seeds.", styles["BodyText"]),
@@ -278,14 +291,17 @@ def build(args: argparse.Namespace) -> None:
                      ["Determinism max absolute difference", fmt(module.get("embedding_determinism_max_abs_difference"), 6)]
               ], [75 * mm, 75 * mm]), PageBreak()]
 
-    story += [Paragraph("C — Pipeline change and gate", styles["Section"]),
+    story += [Paragraph("C - Pipeline change and gate", styles["Section"]),
               Paragraph("The experiment changes chunk size from 400/50 to 320/50 while preserving "
                         "the embedding and generation models. The candidate collection and API "
                         "Service are isolated from the baseline. A runtime ConfigMap supplies "
                         "release thresholds; the gate stops promotion when a limit fails.", styles["BodyText"]),
               Spacer(1, 4 * mm), table([
                   ["Gate threshold", "Configured", "Candidate observation"],
-                  ["Maximum recall@5 drop", "2 percentage points", fmt(seed_a.get("recall@5"))],
+                  ["Maximum recall@5 drop", "2 percentage points",
+                   fmt(max(0.0, float(seed_a["recall@5"]) - float(candidate_a["recall@5"])), 3)
+                   if seed_a.get("recall@5") is not None and candidate_a.get("recall@5") is not None
+                   else "not measured"],
                   ["Minimum human-reviewed faithfulness", "0.80, at least 8 labels", fmt(candidate_a.get("faithfulness"))],
                   ["Minimum citation validity", "0.95", fmt(candidate_a.get("citation_validity"))],
                   ["Maximum p95 latency", "15,000 ms", fmt(candidate_a.get("latency_p95_ms"), 1)],
@@ -297,7 +313,7 @@ def build(args: argparse.Namespace) -> None:
                         "presented as a measured model regression unless the candidate run itself "
                         "produced that result.", styles["Small"]), PageBreak()]
 
-    story += [Paragraph("D — Observability and operations", styles["Section"]),
+    story += [Paragraph("D - Observability and operations", styles["Section"]),
               Paragraph("API traces are emitted as structured JSON to stdout and persisted on the "
                         "`ragops-data` PVC. Each trace includes the request/rewrite, embedding and "
                         "collection version, retrieved source/version/chunk/scores, filters, exact "
@@ -317,7 +333,7 @@ def build(args: argparse.Namespace) -> None:
                         "output from this cluster; screenshots are kept in the appendix and do not "
                         "count toward the eight-page report limit.", styles["Small"]), PageBreak()]
 
-    story += [Paragraph("E/F — Coverage, Kubernetes, and team notes", styles["Section"]),
+    story += [Paragraph("E/F - Coverage, Kubernetes, and team notes", styles["Section"]),
               Paragraph("Forty live queries (28 in-scope and 12 out-of-scope) are compared with the "
                         "golden set using nearest-question embedding similarity. Six questions are "
                         "added from uncovered in-scope topics. The release gate checks in-scope "
@@ -350,7 +366,7 @@ def build(args: argparse.Namespace) -> None:
                         "at runtime; the team must verify questions, labels, citations, and all "
                         "reported live measurements before submission.", styles["Small"]), PageBreak()]
 
-    story += [Paragraph("G — Lifecycle and quality mapping", styles["Section"]),
+    story += [Paragraph("G - Lifecycle and quality mapping", styles["Section"]),
               Paragraph("This follows the two intertwined lifecycles in Figure 3 of the reference "
                         "paper. Open items are recorded explicitly for team review.", styles["BodyText"]),
               Spacer(1, 3 * mm),
@@ -365,7 +381,7 @@ def build(args: argparse.Namespace) -> None:
                 [29 * mm, 76 * mm, 57 * mm]), Spacer(1, 4 * mm),
               compact_table([["Table 2 quality", "Measure / threshold", "Current evidence"],
                 ["Adaptability", "Configurable chunk size and incremental source updates.", "400/50 baseline vs 320/50 candidate; 678/684 chunks."],
-                ["Monitorability", "Recall@5 drop ≤0.02; citation ≥0.95; abstention ≥1.00; p95 ≤15s; coverage ≥0.85.", "Timestamped results and trace summary."],
+                ["Monitorability", "Recall@5 drop <=0.02; citation >=0.95; abstention >=1.00; p95 <=15s; coverage >=0.85.", "Timestamped results and trace summary."],
                 ["Observability", "Track relevance, context adherence, injection flags and cache.", "JSONL traces; injection flagged; eight human judgments recorded."],
                 ["Traceability", "Record versions, retrieval routing, prompt hash and grounded sources.", "Trace reconstruction and PVC JSONL."],
                  ["Reliability", "Resource limits, readiness, persistent PVC and controlled undo.", "Bad-model rollout stalled; undo restored baseline readiness and a new trace confirmed the collection/model."]],
@@ -374,7 +390,7 @@ def build(args: argparse.Namespace) -> None:
     root_cause = (args.root_cause.read_text(encoding="utf-8").strip()
                   if args.root_cause.is_file() else
                   "[select one measured wrong or abstained answer and record its trace-only cause]")
-    story += [Paragraph("G — Short answers and trace diagnosis", styles["Section"]),
+    story += [Paragraph("G - Short answers and trace diagnosis", styles["Section"]),
               Paragraph(f"<b>(a) Verification:</b> {leading_check} caught the most failed checks "
                         f"({failed_checks.get(leading_check, 0)}). An injected document was flagged "
                         f"but remained indexable ({'yes' if missed_injection else 'not observed'}); "
@@ -405,16 +421,20 @@ def build(args: argparse.Namespace) -> None:
                         "thresholds, and the candidate Deployment/Service isolate the changed pipeline "
                         "until a gate passes.", styles["Small"]),
               Spacer(1, 4 * mm),
-              Paragraph("<b>D5 — Root cause from trace only (five lines):</b>", styles["Small"]),
+              Paragraph("<b>D5 - Root cause from trace only (five lines):</b>", styles["Small"]),
               Paragraph(root_cause.replace("\n", "<br/>"), styles["Small"]), PageBreak()]
 
     screenshots = sorted(args.screenshots.glob("*.png")) if args.screenshots.is_dir() else []
     for prefix, caption in SCREENSHOT_CAPTIONS.items():
         match = next((path for path in screenshots if path.name.startswith(prefix)), None)
-        story.append(Paragraph("Appendix — Screenshot evidence", styles["Section"]))
+        story.append(Paragraph("Appendix - Screenshot evidence", styles["Section"]))
         story.append(Paragraph(caption, styles["Caption"]))
         story.append(Spacer(1, 3 * mm))
         if match:
+            screenshot_root = args.screenshots.resolve()
+            match = match.resolve()
+            if match.parent != screenshot_root:
+                raise ValueError("report screenshots must be direct children of the screenshot directory")
             picture = Image(str(match))
             picture._restrictSize(180 * mm, 245 * mm)
             story.append(picture)
@@ -427,13 +447,15 @@ def build(args: argparse.Namespace) -> None:
         width, _ = A4
         canvas.setFont("Helvetica", 8)
         canvas.setFillColor(colors.HexColor("#506574"))
-        canvas.drawString(18 * mm, 12 * mm, "RAHBAR · Assignment 03 · Team review required")
+        canvas.drawString(18 * mm, 12 * mm, "RAHBAR | Assignment 03 | Team review required")
         canvas.drawRightString(width - 18 * mm, 12 * mm, f"{document.page}")
         canvas.restoreState()
 
+    if output != repo_root and repo_root not in output.parents:
+        raise ValueError("report output escaped the repository")
     document = SimpleDocTemplate(str(output), pagesize=A4, rightMargin=18 * mm,
         leftMargin=18 * mm, topMargin=17 * mm, bottomMargin=20 * mm,
-        title="RAHBAR Assignment 03 — RAGOps", author="RAHBAR Team")
+        title="RAHBAR Assignment 03 - RAGOps", author="RAHBAR Team")
     document.build(story, onFirstPage=footer, onLaterPages=footer)
     print(f"Wrote {output} with 8 report pages and {len(SCREENSHOT_CAPTIONS)} screenshot appendix pages")
 

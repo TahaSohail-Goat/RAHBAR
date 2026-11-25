@@ -60,7 +60,12 @@ def main() -> int:
     args.baseline = confined_path(args.baseline, allowed)
     args.thresholds = confined_path(args.thresholds, (REPO_ROOT, Path("/etc/rahbar/gates")))
     if args.out is not None:
-        args.out = confined_path(args.out, (REPO_ROOT, DATA_ROOT))
+        args.out = args.out.resolve()
+        repo_root = REPO_ROOT.resolve()
+        data_root = DATA_ROOT.resolve()
+        if not any(args.out == root or root in args.out.parents
+                   for root in (repo_root, data_root)):
+            raise ValueError("gate output must remain inside the repository or data directory")
     thresholds = yaml.safe_load(args.thresholds.read_text(encoding="utf-8"))
     candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
     baseline = json.loads(args.baseline.read_text(encoding="utf-8"))
@@ -70,6 +75,9 @@ def main() -> int:
               "failures": failures}
     encoded = json.dumps(report, indent=2) + "\n"
     if args.out:
+        if not any(args.out == root or root in args.out.parents
+                   for root in (REPO_ROOT.resolve(), DATA_ROOT.resolve())):
+            raise ValueError("gate output escaped its allowed directory")
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(encoded, encoding="utf-8")
     print(encoded, end="")
