@@ -462,22 +462,6 @@ def build(args: argparse.Namespace) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--baseline", type=Path, default=REPO / "eval/results/baseline.json")
-    parser.add_argument("--candidate", type=Path, default=REPO / "eval/results/candidate.json")
-    parser.add_argument("--verification", type=Path)
-    parser.add_argument("--ingestion", type=Path)
-    parser.add_argument("--coverage", type=Path, default=REPO / "eval/results/coverage.json")
-    parser.add_argument("--gate", type=Path)
-    parser.add_argument("--human-review", type=Path,
-                        default=REPO / "eval/assignment3/human_review.csv")
-    parser.add_argument("--root-cause", type=Path,
-                        default=REPO / "eval/results/root-cause.md")
-    parser.add_argument("--resource-usage", type=Path,
-                        default=REPO / "eval/results/resource-usage.txt")
-    parser.add_argument("--screenshots", type=Path,
-                        default=REPO / "docs/assignment3/screenshots")
-    parser.add_argument("--out", type=Path,
-                        default=REPO / "docs/assignment3/Assignment_03_Report.pdf")
     parser.add_argument("--member1", default="Shaheer")
     parser.add_argument("--roll1", default=os.environ.get("SHAHEER_ROLL", "24I-3063"))
     parser.add_argument("--contribution1", default=(
@@ -490,6 +474,17 @@ def main() -> int:
         "candidate deployment, gate ConfigMap and rollback; report/runbook and terminal evidence; "
         "shared query-coverage and drift work."))
     args = parser.parse_args()
+    args.baseline = REPO / "eval/results/baseline.json"
+    args.candidate = REPO / "eval/results/candidate.json"
+    args.verification = REPO / "eval/results/batch-b-verification.json"
+    args.ingestion = REPO / "eval/results/batch-b-ingestion.json"
+    args.coverage = REPO / "eval/results/coverage.json"
+    args.gate = REPO / "eval/results/gate-latest.json"
+    args.human_review = REPO / "eval/assignment3/human_review.csv"
+    args.root_cause = REPO / "eval/results/root-cause.md"
+    args.resource_usage = REPO / "eval/results/resource-usage.txt"
+    args.screenshots = REPO / "docs/assignment3/screenshots"
+    args.out = REPO / "docs/assignment3/Assignment_03_Report.pdf"
     build(args)
     return 0
 

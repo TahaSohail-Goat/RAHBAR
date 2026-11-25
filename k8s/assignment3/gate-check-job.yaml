@@ -29,7 +29,7 @@ spec:
               python -m eval.assignment3.gate --candidate "$latest"
               --baseline /var/lib/rahbar/results/baseline.json
               --thresholds /etc/rahbar/gates/gate.yaml
-              --out /var/lib/rahbar/results/gate-check-latest.json
+              --check-report
           volumeMounts:
             - {name: ragops-data, mountPath: /var/lib/rahbar}
             - {name: thresholds, mountPath: /etc/rahbar/gates, readOnly: true}

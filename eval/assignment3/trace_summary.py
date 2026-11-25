@@ -24,16 +24,17 @@ def main() -> int:
     parser.add_argument("--file", type=Path, default=Path("/var/lib/rahbar/traces/queries.jsonl"))
     parser.add_argument("--since", help="ISO timestamp, inclusive")
     parser.add_argument("--until", help="ISO timestamp, inclusive")
-    parser.add_argument("--out", type=Path)
+    parser.add_argument("--save", action="store_true",
+                        help="write trace-summary.json under the fixed results directory")
     args = parser.parse_args()
     repo_root = Path(__file__).resolve().parents[2]
     data_root = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar"))
     args.file = confined_path(args.file, (repo_root, data_root))
-    if args.out is not None:
-        args.out = args.out.resolve()
-        if not any(args.out == root or root in args.out.parents
-                   for root in (repo_root.resolve(), data_root.resolve())):
-            raise ValueError("trace summary output must remain inside an allowed data root")
+    if args.save:
+        output_root = data_root / "results" if os.environ.get("RAGOPS_DATA_DIR") else repo_root / "eval" / "results"
+        args.out = (output_root / "trace-summary.json").resolve()
+    else:
+        args.out = None
     since = datetime.fromisoformat(args.since.replace("Z", "+00:00")) if args.since else None
     until = datetime.fromisoformat(args.until.replace("Z", "+00:00")) if args.until else None
     records = []
