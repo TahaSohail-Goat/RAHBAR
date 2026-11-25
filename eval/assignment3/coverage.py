@@ -90,7 +90,7 @@ def main() -> int:
     repo_root = ROOT.resolve()
     args.before = confined_path(args.before, (repo_root,))
     args.after = confined_path(args.after, (repo_root,))
-    args.out = (ROOT / "results" / "coverage.json").resolve()
+    output_path = (ROOT / "results" / "coverage.json").resolve()
     live, before, after = read(args.live), read(args.before), read(args.after)
     questions = [item["question"] for item in live + before + after]
     vectors = embed(questions, get_settings())
@@ -104,10 +104,10 @@ def main() -> int:
               "before": before_result, "after": after_result,
               "minimum_coverage": args.min_coverage,
               "coverage_increased": after_result["coverage"] > before_result["coverage"]}
-    if args.out != repo_root and repo_root not in args.out.parents:
+    if output_path != repo_root and repo_root not in output_path.parents:
         raise ValueError("coverage output escaped the repository")
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0 if report["coverage_increased"] and after_result["in_scope_coverage"] >= args.min_coverage else 1
 
