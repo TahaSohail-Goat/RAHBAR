@@ -323,8 +323,15 @@ def main() -> int:
                                 if len(faith_labels) >= 8 else
                                 f"pending: complete {review_path} for at least 8 answers"),
     }
-    out = args.out or confined_path(OUT / f"run-{stamp}.json", allowed_data)
+    out = args.out or OUT / f"run-{stamp}.json"
+    out = out.resolve()
+    repo_root = ROOT.resolve()
+    data_root = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar")).resolve()
+    if not any(out == root or root in out.parents for root in (repo_root, data_root)):
+        raise ValueError("evaluation output must remain inside the repository or data directory")
     out.parent.mkdir(parents=True, exist_ok=True)
+    if not any(out == root or root in out.parents for root in (repo_root, data_root)):
+        raise ValueError("evaluation output escaped its allowed directory")
     out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({"result": str(out), "seed_a": summary_a, "seed_b": summary_b,
                       "noise": noise, "stochasticity": variance}, indent=2))
