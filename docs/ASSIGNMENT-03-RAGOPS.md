@@ -60,6 +60,12 @@ eight labels exist, the runtime gate fails closed.
    kubectl -n rahbar rollout status deployment/api
    ```
 
+   If Ollama runs on Windows and the Minikube default host cannot reach it,
+   set the reachable Windows IPv4 address explicitly before running
+   `make deploy-real`. Set both `OLLAMA_IP` to that address and
+   `OLLAMA_URL` to `http://<Windows IPv4 address>:11434`. Use a trusted local
+   network and see [the transport review](SECURITY-REVIEW.md).
+
    API/indexer share the `ragops-data` PVC. The initial indexer copies its image
    corpus to `/var/lib/rahbar/lake`; reports, archive, quarantine, embedding
    ledger, evaluation results, and traces persist on the PVC.
