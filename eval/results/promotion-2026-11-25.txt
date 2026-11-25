@@ -1,0 +1,36 @@
+kubectl -n rahbar logs job/ragops-gate-verify-1125
+{
+  "candidate": "/var/lib/rahbar/results/run-20261125T131348243006808Z.json",
+  "baseline": "/var/lib/rahbar/results/baseline.json",
+  "thresholds": {
+    "max_recall5_drop": 0.02,
+    "min_faithfulness": 0.8,
+    "min_human_faithfulness_labels": 8,
+    "min_citation_validity": 0.95,
+    "max_latency_p95_ms": 15000,
+    "min_abstention_correctness": 1.0,
+    "min_query_coverage": 0.85
+  },
+  "decision": "release",
+  "failures": []
+}
+kubectl -n rahbar set env deployment/api CHROMA_COLLECTION=rahbar-candidate
+deployment.apps/api env updated
+kubectl -n rahbar rollout status deployment/api --timeout=90s
+Waiting for deployment "api" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
+kubectl -n rahbar get deployment api
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+api    3/3     3            3           4d15h
+kubectl -n rahbar set env deployment/api --list (filtered to CHROMA_COLLECTION)
+CHROMA_COLLECTION=rahbar-candidate
+kubectl -n rahbar exec deployment/api -- python -c "from urllib.request import urlopen; print(urlopen('http://127.0.0.1:8000/readyz').read().decode())"
+{"status":"ready","checks":{"chroma":"ok (684 chunks, 768 dimensions)","embedding_pin":"ok","redis":"ok"}}

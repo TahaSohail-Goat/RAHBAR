@@ -296,6 +296,11 @@ def build(args: argparse.Namespace) -> None:
                         "the embedding and generation models. The candidate collection and API "
                         "Service are isolated from the baseline. A runtime ConfigMap supplies "
                         "release thresholds; the gate stops promotion when a limit fails.", styles["BodyText"]),
+              Spacer(1, 3 * mm),
+              Paragraph("After the saved candidate passed the gate, the live API completed its "
+                        "rolling update to rahbar-candidate with 3/3 replicas ready. "
+                        "The readiness probe verified 684 chunks, the embedding pin, and Redis. "
+                        "See eval/results/promotion-2026-11-25.txt.", styles["BodyText"]),
               Spacer(1, 4 * mm), table([
                   ["Gate threshold", "Configured", "Candidate observation"],
                   ["Maximum recall@5 drop", "2 percentage points",
