@@ -10,11 +10,13 @@ from typing import Any
 
 from indexer.pipeline.config import get_settings
 from indexer.pipeline.embed import embed
+from eval.assignment3.safe_paths import confined_path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def read(path: Path) -> list[dict[str, Any]]:
+    path = confined_path(path, (ROOT,))
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
@@ -85,6 +87,10 @@ def main() -> int:
     parser.add_argument("--min-coverage", type=float, default=0.85)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "coverage.json")
     args = parser.parse_args()
+    args.live = confined_path(args.live, (ROOT,))
+    args.before = confined_path(args.before, (ROOT,))
+    args.after = confined_path(args.after, (ROOT,))
+    args.out = confined_path(args.out, (ROOT,))
     live, before, after = read(args.live), read(args.before), read(args.after)
     questions = [item["question"] for item in live + before + after]
     vectors = embed(questions, get_settings())

@@ -28,12 +28,14 @@ from indexer.pipeline.run import build_chunks, prepare
 from indexer.pipeline.embed import embed as embed_indexer
 from eval.assignment3.coverage import compare as compare_coverage
 from eval.assignment3.corpus import verified_corpus_sources
+from eval.assignment3.safe_paths import confined_path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results"
 
 
 def rows(path: Path) -> list[dict[str, Any]]:
+    path = confined_path(path, (ROOT,))
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
@@ -105,8 +107,8 @@ def score_response(question: dict, response: Any, seconds: float) -> dict:
                       all((cite.source, cite.section, cite.page) in allowed for cite in response.citations)
                       if response.answered_from_context else not response.citations)
     patterns = question.get("required_answer_patterns", [])
-    import re
-    answer_check = all(re.search(pattern, response.answer, re.I) for pattern in patterns) if patterns else None
+    answer_check = (all(required_fact_matches(pattern, response.answer) for pattern in patterns)
+                    if patterns else None)
     return {
         "id": question["id"], "question": question["question"], "type": question.get("type"),
         "hard": bool(question.get("hard")), "relevant": refs,
@@ -120,6 +122,21 @@ def score_response(question: dict, response: Any, seconds: float) -> dict:
         ),
         "required_facts_pass": answer_check,
     }
+
+
+def required_fact_matches(pattern: str, answer: str) -> bool:
+    """Match the golden-set mini-pattern syntax without evaluating arbitrary regexes."""
+    if len(pattern) > 256 or len(answer) > 100_000:
+        return False
+    normalized_pattern = pattern.casefold()
+    for token, replacement in ((r"\b", ""), (r"[\s-]+", " "),
+                               (r"\s+", " "), (r"\s*", "")):
+        normalized_pattern = normalized_pattern.replace(token, replacement)
+    if "\\" in normalized_pattern or "[" in normalized_pattern or "]" in normalized_pattern:
+        return False
+    normalized_answer = " ".join(answer.casefold().replace("-", " ").split())
+    normalized_answer = normalized_answer.replace(" %", "%")
+    return " ".join(normalized_pattern.split()) in normalized_answer
 
 
 def aggregate(scored: list[dict]) -> dict:
@@ -209,6 +226,10 @@ def main() -> int:
     parser.add_argument("--seed-b", type=int, default=43)
     parser.add_argument("--skip-module", action="store_true")
     args = parser.parse_args()
+    allowed_data = (ROOT, Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar")))
+    args.golden = confined_path(args.golden, (ROOT,))
+    if args.out is not None:
+        args.out = confined_path(args.out, allowed_data)
     questions = rows(args.golden)
     settings = get_settings()
     if args.collection:
@@ -264,6 +285,7 @@ def main() -> int:
     faithfulness = sum(faith_labels) / len(faith_labels) if len(faith_labels) >= 8 else None
     summary_a["faithfulness"] = faithfulness
     summary_a["faithfulness_label_count"] = len(faith_labels)
+    summary_a["faithfulness_human_labels"] = len(faith_labels)
     # The release gate evaluates the in-scope set after the required six-question
     # expansion. Keep pre-expansion and all-live values alongside it for reporting.
     summary_a["query_coverage"] = expanded_coverage["in_scope_coverage"]
@@ -274,6 +296,7 @@ def main() -> int:
     summary_a["coverage_in_scope_total"] = expanded_coverage["in_scope_total"]
     summary_b["faithfulness"] = faithfulness
     summary_b["faithfulness_label_count"] = len(faith_labels)
+    summary_b["faithfulness_human_labels"] = len(faith_labels)
     summary_b["query_coverage"] = expanded_coverage["in_scope_coverage"]
     summary_b["query_coverage_before_six"] = coverage["in_scope_coverage"]
     summary_b["query_coverage_all_live"] = coverage["coverage"]
@@ -296,9 +319,11 @@ def main() -> int:
         "coverage_after_six_questions": expanded_coverage,
         "cache_probe": cache_result,
         "stochasticity_metric_differences_seed_b_minus_a": variance,
-        "faithfulness_review": f"pending: complete {review_path} for at least 8 answers",
+        "faithfulness_review": (f"complete: {len(faith_labels)} human judgments recorded"
+                                if len(faith_labels) >= 8 else
+                                f"pending: complete {review_path} for at least 8 answers"),
     }
-    out = args.out or (OUT / f"run-{stamp}.json")
+    out = args.out or confined_path(OUT / f"run-{stamp}.json", allowed_data)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({"result": str(out), "seed_a": summary_a, "seed_b": summary_b,

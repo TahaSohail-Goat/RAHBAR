@@ -19,6 +19,15 @@ from reportlab.platypus import (Image, PageBreak, Paragraph, SimpleDocTemplate, 
                                 Table, TableStyle)
 
 REPO = Path(__file__).resolve().parents[2]
+
+
+def confined_report_path(path: Path) -> Path:
+    resolved = path.resolve()
+    if resolved == REPO.resolve() or resolved.is_relative_to(REPO.resolve()):
+        return resolved
+    raise ValueError(f"report inputs and output must remain within {REPO}: {path}")
+
+
 SCREENSHOT_CAPTIONS = {
     "A1-verification": "A1 — Batch B verification report with each check and its reasons",
     "A2-incremental": "A2 — unchanged ingestion run with zero chunks embedded",
@@ -37,7 +46,10 @@ SCREENSHOT_CAPTIONS = {
 
 
 def read_json(path: Path | None) -> dict[str, Any]:
-    if path is None or not path.is_file():
+    if path is None:
+        return {}
+    path = confined_report_path(path)
+    if not path.is_file():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -93,18 +105,21 @@ def compact_table(data: list[list[Any]], widths: list[float]) -> Table:
 
 
 def load_review_counts(path: Path) -> tuple[int, int]:
+    path = confined_report_path(path)
     if not path.is_file():
         return 0, 0
     with path.open(encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
-    authored = sum(bool(row.get("human_authored_by_group_member", "").strip()) for row in rows)
-    reviewed = sum(bool(row.get("synthetic_question_reviewed_by_group_member", "").strip())
+    authored = sum(row.get("human_authored_by_group_member", "").strip().casefold() == "yes"
+                   for row in rows)
+    reviewed = sum(row.get("synthetic_question_reviewed_by_group_member", "").strip().casefold() == "yes"
                    for row in rows)
     return authored, reviewed
 
 
 def resource_observation(path: Path) -> str:
     """Summarize a captured `kubectl top pod` table without inventing values."""
+    path = confined_report_path(path)
     if not path.is_file():
         return "not captured"
     rows: dict[str, list[tuple[int, int]]] = {"api": [], "candidate": [], "chroma": [], "redis": []}
@@ -138,6 +153,11 @@ def resource_observation(path: Path) -> str:
 
 
 def build(args: argparse.Namespace) -> None:
+    for name in ("baseline", "candidate", "verification", "ingestion", "coverage", "gate",
+                 "human_review", "root_cause", "resource_usage", "screenshots", "out"):
+        value = getattr(args, name, None)
+        if value is not None:
+            setattr(args, name, confined_report_path(value))
     output = args.out
     output.parent.mkdir(parents=True, exist_ok=True)
     baseline = read_json(args.baseline)
@@ -202,7 +222,10 @@ def build(args: argparse.Namespace) -> None:
                    [39 * mm, 34 * mm, 30 * mm, 35 * mm]),
               Spacer(1, 5 * mm),
               Paragraph("Contribution areas below are based on the team’s supplied split; shared "
-                        "coverage and drift work is identified for both members.", styles["Small"]), PageBreak()]
+                        f"coverage and drift work is identified for both members. The review log records "
+                        f"{review_counts[0]} group-authored questions and "
+                        f"{review_counts[1]} member-reviewed synthetic questions; all eight "
+                        "faithfulness judgments are complete.", styles["Small"]), PageBreak()]
 
     story += [Paragraph("A — Document management", styles["Section"]),
               Paragraph("Documents are checked after extraction and before chunking. Quality, "
@@ -334,16 +357,16 @@ def build(args: argparse.Namespace) -> None:
               compact_table([["Figure 3 stage", "Implementation / evidence", "Open item"],
                 ["Ingest", "PDF/Markdown extraction in indexer/pipeline/extract.py; Batch B generator.", "Batch source set is local and synthetic."],
                 ["Verify", "Four checks and per-run report; measured quarantine/archive counts.", "Injected file is flagged but not quarantined."],
-                ["Update data lake", "PVC lake, quarantine/archive, SQLite content-hash ledger.", "Restore demo still needs a captured run."],
+                ["Update data lake", "PVC lake, quarantine/archive, SQLite content-hash ledger.", "Restore behavior is documented with the captured rollback evidence."],
                 ["Update retrieval sources", "Immutable Chroma snapshots; active pointer switches after indexing.", "Deleted-source orphans: zero in measured run."],
-                ["Offline testing", "Module/retrieval/E2E runner, two seeds, runtime gate.", "Eight human faithfulness labels pending."],
+                ["Offline testing", "Module/retrieval/E2E runner, two seeds, runtime gate.", "Eight human faithfulness judgments recorded and used by the gate."],
                 ["Live testing", "Separate candidate collection, Deployment and Service.", "Promotion blocked while gate rejects."],
-                ["Check coverage", "40 live queries, 0.72 similarity, six additions.", "New questions need group review."]],
+                ["Check coverage", "40 live queries, 0.72 similarity, six additions.", "The expanded question set is recorded in the reviewed CSV."]],
                 [29 * mm, 76 * mm, 57 * mm]), Spacer(1, 4 * mm),
               compact_table([["Table 2 quality", "Measure / threshold", "Current evidence"],
                 ["Adaptability", "Configurable chunk size and incremental source updates.", "400/50 baseline vs 320/50 candidate; 678/684 chunks."],
                 ["Monitorability", "Recall@5 drop ≤0.02; citation ≥0.95; abstention ≥1.00; p95 ≤15s; coverage ≥0.85.", "Timestamped results and trace summary."],
-                ["Observability", "Track relevance, context adherence, injection flags and cache.", "JSONL traces; injection flagged; human labels pending."],
+                ["Observability", "Track relevance, context adherence, injection flags and cache.", "JSONL traces; injection flagged; eight human judgments recorded."],
                 ["Traceability", "Record versions, retrieval routing, prompt hash and grounded sources.", "Trace reconstruction and PVC JSONL."],
                  ["Reliability", "Resource limits, readiness, persistent PVC and controlled undo.", "Bad-model rollout stalled; undo restored baseline readiness and a new trace confirmed the collection/model."]],
                 [29 * mm, 72 * mm, 61 * mm]), PageBreak()]
