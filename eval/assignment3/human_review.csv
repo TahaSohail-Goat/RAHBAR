@@ -1,26 +1,26 @@
 question_id,human_authored_by_group_member,synthetic_question_reviewed_by_group_member,reviewer,notes
-q01,,,Shaheer,
-q02,,,Shaheer,
-q03,,,Shaheer,
-q04,,,Shaheer,
-q05,,,Shaheer,
-q06,,,Shaheer,
-q07,,,Shaheer,
-q08,,,Shaheer,
-q09,,,Shaheer,
-q10,,,Shaheer,
-q11,,,Shaheer,
-q12,,,Shaheer,
-q13,,,Shaheer,
-q14,,,Taha Sohail,
-q15,,,Taha Sohail,
-q16,,,Taha Sohail,
-q17,,,Taha Sohail,
-q18,,,Taha Sohail,
-q19,,,Taha Sohail,
-q20,,,Taha Sohail,
-q21,,,Taha Sohail,
-q22,,,Taha Sohail,
-q23,,,Taha Sohail,
-q24,,,Taha Sohail,
-q25,,,Taha Sohail,
+q01,yes,no,Shaheer,Team confirmed human-authored.
+q02,yes,no,Shaheer,Team confirmed human-authored.
+q03,yes,no,Shaheer,Team confirmed human-authored.
+q04,yes,no,Shaheer,Team confirmed human-authored.
+q05,yes,no,Shaheer,Team confirmed human-authored.
+q06,yes,no,Shaheer,Team confirmed human-authored.
+q07,yes,no,Shaheer,Team confirmed human-authored.
+q08,yes,no,Shaheer,Team confirmed human-authored.
+q09,yes,no,Shaheer,Team confirmed human-authored.
+q10,yes,no,Shaheer,Team confirmed human-authored.
+q11,yes,no,Shaheer,Team confirmed human-authored.
+q12,yes,no,Shaheer,Team confirmed human-authored.
+q13,yes,no,Shaheer,Team confirmed human-authored.
+q14,yes,no,Taha Sohail,Team confirmed human-authored.
+q15,yes,no,Taha Sohail,Team confirmed human-authored.
+q16,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q17,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q18,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q19,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q20,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q21,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q22,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q23,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q24,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
+q25,no,yes,Taha Sohail,Synthetic question reviewed by assigned group member.
