@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 
@@ -13,6 +14,13 @@ def _doc(title: str, version: str, body: str, logical_id: str | None = None) -> 
 
 
 def create_batch(out: Path) -> list[str]:
+    resolved = out.resolve()
+    repo = Path(__file__).resolve().parents[2]
+    corpus = Path(os.environ.get("CORPUS_DIR", "/corpus")).resolve()
+    if not any(resolved == root or resolved.is_relative_to(root) for root in
+               (repo.resolve(), corpus)):
+        raise ValueError(f"Batch B output must be under the repository or corpus directory: {out}")
+    out = resolved
     out.mkdir(parents=True, exist_ok=True)
     entries: dict[str, str] = {
         "01-enrollment.md": _doc("Enrollment Guide", "2026-01",

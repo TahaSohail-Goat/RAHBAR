@@ -6,8 +6,8 @@ RUN apt-get update && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -u 10001 -m rahbar
 COPY api/requirements.txt /tmp/api-requirements.txt
-COPY indexer/requirements.txt /tmp/indexer-requirements.txt
-RUN pip install --no-cache-dir -r /tmp/api-requirements.txt -r /tmp/indexer-requirements.txt
+COPY requirements-audit.lock /tmp/requirements.lock
+RUN pip install --no-cache-dir --only-binary=:all: --require-hashes -r /tmp/requirements.lock
 COPY api/app ./api/app
 COPY indexer/pipeline ./indexer/pipeline
 COPY eval ./eval

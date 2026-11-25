@@ -5,8 +5,14 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import os
 
 import yaml
+
+from eval.assignment3.safe_paths import confined_path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_ROOT = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar"))
 
 
 def summary(result: dict) -> dict:
@@ -49,6 +55,12 @@ def main() -> int:
                         default=Path(__file__).with_name("gate.yaml"))
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
+    allowed = (REPO_ROOT, DATA_ROOT, Path("/etc/rahbar/gates"))
+    args.candidate = confined_path(args.candidate, allowed)
+    args.baseline = confined_path(args.baseline, allowed)
+    args.thresholds = confined_path(args.thresholds, (REPO_ROOT, Path("/etc/rahbar/gates")))
+    if args.out is not None:
+        args.out = confined_path(args.out, (REPO_ROOT, DATA_ROOT))
     thresholds = yaml.safe_load(args.thresholds.read_text(encoding="utf-8"))
     candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
     baseline = json.loads(args.baseline.read_text(encoding="utf-8"))

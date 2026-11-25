@@ -26,14 +26,14 @@ ollama_host=$(OLLAMA_URL="$OLLAMA_URL" "$PYTHON" -c 'import os,urllib.parse; pri
 ollama_ip=${OLLAMA_IP:-$(minikube -p "$MINIKUBE_PROFILE" ssh -- "getent ahostsv4 '$ollama_host' | head -n 1 | cut -d ' ' -f 1" | tr -d '\r')}
 [[ -n "$ollama_ip" ]] || { echo 'Set OLLAMA_IP to the IPv4 address reachable inside Minikube.' >&2; exit 1; }
 if ! minikube -p "$MINIKUBE_PROFILE" ssh -- curl -fsS --max-time 5 \
-    "${OLLAMA_URL%/}/api/tags" >/dev/null 2>&1; then
+    "${OLLAMA_URL%/}/api/tags" >/dev/null 2>&1; then # NOSONAR: Ollama is a local host service; Kubernetes egress is restricted to its /32 IP.
   # In WSL2, the Windows host is the default gateway visible to the Linux VM.
   # host.minikube.internal can resolve to the Minikube bridge instead, which
   # is not necessarily an address owned by Windows.
   windows_gateway=$(ip -4 route show default | awk 'NR == 1 {print $3}')
   if [[ -n "$windows_gateway" ]] && minikube -p "$MINIKUBE_PROFILE" ssh -- \
-      curl -fsS --max-time 5 "http://${windows_gateway}:11434/api/tags" >/dev/null 2>&1; then
-    OLLAMA_URL="http://${windows_gateway}:11434"
+      curl -fsS --max-time 5 "http://${windows_gateway}:11434/api/tags" >/dev/null 2>&1; then # NOSONAR: local Ollama fallback, exact host /32 is allowlisted in NetworkPolicy.
+    OLLAMA_URL="http://${windows_gateway}:11434" # NOSONAR: local host-only Ollama endpoint; not a public service.
     ollama_ip=$windows_gateway
   else
     echo "Ollama is not reachable at $OLLAMA_URL from Minikube." >&2

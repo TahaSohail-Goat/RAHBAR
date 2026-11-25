@@ -55,14 +55,18 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
     present. Otherwise read Markdown front matter (the CI fixtures work this way).
     """
     root = Path(corpus_dir)
+    resolved_root = root.resolve()
     index = root / "_index.json"
     found: list[tuple[Path, str, bool]] = []
     indexed: set[Path] = set()
     if index.exists():
         entries = json.loads(index.read_text(encoding="utf-8"))
         for entry in entries:
-            path = root / entry["file"]
-            if path.is_file():
+            relative = Path(entry["file"])
+            if relative.is_absolute() or ".." in relative.parts:
+                continue
+            path = (root / relative).resolve()
+            if path.is_relative_to(resolved_root) and path.is_file():
                 found.append((path, str(entry.get("doc_version", "unknown")),
                               bool(entry.get("superseded", False))))
                 indexed.add(path.resolve())

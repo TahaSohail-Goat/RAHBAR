@@ -7,6 +7,9 @@ import json
 import math
 from datetime import datetime
 from pathlib import Path
+import os
+
+from eval.assignment3.safe_paths import confined_path
 
 
 def percentile(values: list[float], fraction: float) -> float | None:
@@ -23,6 +26,11 @@ def main() -> int:
     parser.add_argument("--until", help="ISO timestamp, inclusive")
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
+    repo_root = Path(__file__).resolve().parents[2]
+    data_root = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar"))
+    args.file = confined_path(args.file, (repo_root, data_root))
+    if args.out is not None:
+        args.out = confined_path(args.out, (repo_root, data_root))
     since = datetime.fromisoformat(args.since.replace("Z", "+00:00")) if args.since else None
     until = datetime.fromisoformat(args.until.replace("Z", "+00:00")) if args.until else None
     records = []

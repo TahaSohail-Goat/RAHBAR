@@ -50,5 +50,5 @@ spec:
             readOnlyRootFilesystem: true
             capabilities: {drop: [ALL]}
           resources:
-            requests: {cpu: 500m, memory: 1Gi}
-            limits: {cpu: "2", memory: 3Gi}
+            requests: {cpu: 500m, memory: 1Gi, ephemeral-storage: 256Mi}
+            limits: {cpu: "2", memory: 3Gi, ephemeral-storage: 1Gi}
