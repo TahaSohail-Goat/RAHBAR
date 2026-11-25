@@ -227,10 +227,7 @@ def main() -> int:
     parser.add_argument("--seed-b", type=int, default=43)
     parser.add_argument("--skip-module", action="store_true")
     args = parser.parse_args()
-    allowed_data = (ROOT, Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar")))
     args.golden = confined_path(args.golden, (ROOT,))
-    if args.out is not None:
-        args.out = confined_path(args.out, allowed_data)
     questions = rows(args.golden)
     settings = get_settings()
     if args.collection:
@@ -272,9 +269,14 @@ def main() -> int:
                          "faithfulness_supported_yes_no", "reviewer", "notes"])
         for row in [item for item in run_a if item["relevant"]][:8]:
             response = row["response"]
+            citations = json.dumps(response["citations"], ensure_ascii=False)
             previous = previous_reviews.get(row["id"], {})
+            if (previous.get("question"), previous.get("answer"), previous.get("citations")) != (
+                row["question"], response["answer"], citations
+            ):
+                previous = {}
             writer.writerow([row["id"], response["request_id"], row["question"],
-                             response["answer"], json.dumps(response["citations"], ensure_ascii=False),
+                             response["answer"], citations,
                              previous.get("faithfulness_supported_yes_no", ""),
                              previous.get("reviewer", ""), previous.get("notes", "")])
     faith_labels = []

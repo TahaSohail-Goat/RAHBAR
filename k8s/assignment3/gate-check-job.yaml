@@ -30,6 +30,8 @@ spec:
               --baseline /var/lib/rahbar/results/baseline.json
               --thresholds /etc/rahbar/gates/gate.yaml
               --check-report
+          env:
+            - {name: RAGOPS_DATA_DIR, value: /var/lib/rahbar}
           volumeMounts:
             - {name: ragops-data, mountPath: /var/lib/rahbar}
             - {name: thresholds, mountPath: /etc/rahbar/gates, readOnly: true}
