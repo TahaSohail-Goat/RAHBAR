@@ -201,8 +201,8 @@ def build(args: argparse.Namespace) -> None:
                      gate_result.get("decision", "not measured")]],
                    [39 * mm, 34 * mm, 30 * mm, 35 * mm]),
               Spacer(1, 5 * mm),
-              Paragraph("Roll numbers and contribution attribution must be checked by the team "
-                        "before submission.", styles["Small"]), PageBreak()]
+              Paragraph("Contribution areas below are based on the team’s supplied split; shared "
+                        "coverage and drift work is identified for both members.", styles["Small"]), PageBreak()]
 
     story += [Paragraph("A — Document management", styles["Section"]),
               Paragraph("Documents are checked after extraction and before chunking. Quality, "
@@ -434,11 +434,16 @@ def main() -> int:
     parser.add_argument("--out", type=Path,
                         default=REPO / "docs/assignment3/Assignment_03_Report.pdf")
     parser.add_argument("--member1", default="Shaheer")
-    parser.add_argument("--roll1", default=os.environ.get("SHAHEER_ROLL", ""))
-    parser.add_argument("--contribution1", default="")
+    parser.add_argument("--roll1", default=os.environ.get("SHAHEER_ROLL", "24I-3063"))
+    parser.add_argument("--contribution1", default=(
+        "Batch B ingestion and verification; evaluation, golden set and release-gate thresholds; "
+        "CI/image testing and nginx vulnerability fix; shared query-coverage and drift work."))
     parser.add_argument("--member2", default="Taha Sohail")
-    parser.add_argument("--roll2", default=os.environ.get("TAHA_ROLL", ""))
-    parser.add_argument("--contribution2", default="")
+    parser.add_argument("--roll2", default=os.environ.get("TAHA_ROLL", "24I-3165"))
+    parser.add_argument("--contribution2", default=(
+        "Query tracing, prompt reconstruction and trace summaries; Kubernetes Jobs/CronJobs, "
+        "candidate deployment, gate ConfigMap and rollback; report/runbook and terminal evidence; "
+        "shared query-coverage and drift work."))
     args = parser.parse_args()
     build(args)
     return 0
