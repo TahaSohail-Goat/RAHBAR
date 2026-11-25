@@ -37,6 +37,7 @@ spec:
             - configMapRef: {name: rahbar-config}
           env:
             - {name: CHROMA_COLLECTION, value: rahbar-candidate}
+            - {name: CHUNK_SIZE, value: "320"}
             - {name: CORPUS_DIR, value: /var/lib/rahbar/lake}
             - {name: RAGOPS_DATA_DIR, value: /var/lib/rahbar}
           volumeMounts:
