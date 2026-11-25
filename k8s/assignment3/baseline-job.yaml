@@ -23,7 +23,7 @@ spec:
           image: rahbar-eval:dev
           imagePullPolicy: IfNotPresent
           command: [python, -m, eval.assignment3.runner]
-          args: [--collection, rahbar, --out, /var/lib/rahbar/results/baseline.json]
+          args: [--collection, rahbar, --baseline]
           envFrom:
             - configMapRef: {name: rahbar-config}
           env:

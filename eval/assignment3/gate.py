@@ -53,19 +53,16 @@ def main() -> int:
     parser.add_argument("--baseline", type=Path, required=True)
     parser.add_argument("--thresholds", type=Path,
                         default=Path(__file__).with_name("gate.yaml"))
-    parser.add_argument("--out", type=Path)
+    parser.add_argument("--check-report", action="store_true",
+                        help="write the fixed gate-check-latest.json artifact")
     args = parser.parse_args()
     allowed = (REPO_ROOT, DATA_ROOT, Path("/etc/rahbar/gates"))
     args.candidate = confined_path(args.candidate, allowed)
     args.baseline = confined_path(args.baseline, allowed)
     args.thresholds = confined_path(args.thresholds, (REPO_ROOT, Path("/etc/rahbar/gates")))
-    if args.out is not None:
-        args.out = args.out.resolve()
-        repo_root = REPO_ROOT.resolve()
-        data_root = DATA_ROOT.resolve()
-        if not any(args.out == root or root in args.out.parents
-                   for root in (repo_root, data_root)):
-            raise ValueError("gate output must remain inside the repository or data directory")
+    output_root = DATA_ROOT / "results" if os.environ.get("RAGOPS_DATA_DIR") else REPO_ROOT / "eval" / "results"
+    output_name = "gate-check-latest.json" if args.check_report else "gate-latest.json"
+    args.out = (output_root / output_name).resolve()
     thresholds = yaml.safe_load(args.thresholds.read_text(encoding="utf-8"))
     candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
     baseline = json.loads(args.baseline.read_text(encoding="utf-8"))

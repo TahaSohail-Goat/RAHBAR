@@ -28,13 +28,11 @@ spec:
           args:
             - >-
               mkdir -p /var/lib/rahbar/results /var/lib/rahbar/reviews;
-              python -m eval.assignment3.runner --collection "$CHROMA_COLLECTION"
-              --out "/var/lib/rahbar/results/run-$(date -u +%Y%m%dT%H%M%S%NZ).json";
+              python -m eval.assignment3.runner --collection "$CHROMA_COLLECTION";
               latest=$(ls -1t /var/lib/rahbar/results/run-*.json | head -n 1);
               python -m eval.assignment3.gate --candidate "$latest"
               --baseline /var/lib/rahbar/results/baseline.json
               --thresholds /etc/rahbar/gates/gate.yaml
-              --out /var/lib/rahbar/results/gate-latest.json
           envFrom:
             - configMapRef: {name: rahbar-config}
           env:

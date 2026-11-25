@@ -85,15 +85,12 @@ def main() -> int:
     parser.add_argument("--after", type=Path, default=ROOT / "golden_after_coverage.jsonl")
     parser.add_argument("--threshold", type=float, default=0.72)
     parser.add_argument("--min-coverage", type=float, default=0.85)
-    parser.add_argument("--out", type=Path, default=ROOT / "results" / "coverage.json")
     args = parser.parse_args()
     args.live = confined_path(args.live, (ROOT,))
     repo_root = ROOT.resolve()
     args.before = confined_path(args.before, (repo_root,))
     args.after = confined_path(args.after, (repo_root,))
-    args.out = args.out.resolve()
-    if args.out != repo_root and repo_root not in args.out.parents:
-        raise ValueError("coverage output must remain inside the repository")
+    args.out = (ROOT / "results" / "coverage.json").resolve()
     live, before, after = read(args.live), read(args.before), read(args.after)
     questions = [item["question"] for item in live + before + after]
     vectors = embed(questions, get_settings())

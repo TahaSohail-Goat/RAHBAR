@@ -220,7 +220,8 @@ def misspell(question: str) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--golden", type=Path, default=ROOT / "golden.jsonl")
-    parser.add_argument("--out", type=Path)
+    parser.add_argument("--baseline", action="store_true",
+                        help="write the fixed baseline.json artifact")
     parser.add_argument("--collection", default=None)
     parser.add_argument("--seed-a", type=int, default=42)
     parser.add_argument("--seed-b", type=int, default=43)
@@ -323,12 +324,13 @@ def main() -> int:
                                 if len(faith_labels) >= 8 else
                                 f"pending: complete {review_path} for at least 8 answers"),
     }
-    out = args.out or OUT / f"run-{stamp}.json"
-    out = out.resolve()
+    data_dir = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar"))
+    output_root = data_dir / "results" if os.environ.get("RAGOPS_DATA_DIR") else OUT
+    requested_name = "baseline.json" if args.baseline else f"run-{stamp}.json"
+    out = output_root / requested_name
     repo_root = ROOT.resolve()
-    data_root = Path(os.environ.get("RAGOPS_DATA_DIR", "/var/lib/rahbar")).resolve()
-    if not any(out == root or root in out.parents for root in (repo_root, data_root)):
-        raise ValueError("evaluation output must remain inside the repository or data directory")
+    data_root = data_dir.resolve()
+    out = out.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     if not any(out == root or root in out.parents for root in (repo_root, data_root)):
         raise ValueError("evaluation output escaped its allowed directory")

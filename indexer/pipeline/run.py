@@ -61,12 +61,14 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
     indexed: set[Path] = set()
     if index.exists():
         entries = json.loads(index.read_text(encoding="utf-8"))
+        corpus_files = {candidate.resolve() for candidate in root.rglob("*")
+                        if candidate.is_file()}
         for entry in entries:
             relative = Path(entry["file"])
             if relative.is_absolute() or ".." in relative.parts:
                 continue
             path = (root / relative).resolve()
-            if path.is_relative_to(resolved_root) and path.is_file():  # NOSONAR: contained manifest entries need an existence check to skip stale records.
+            if path.is_relative_to(resolved_root) and path in corpus_files:
                 found.append((path, str(entry.get("doc_version", "unknown")),
                               bool(entry.get("superseded", False))))
                 indexed.add(path.resolve())
