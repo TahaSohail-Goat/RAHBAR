@@ -63,11 +63,19 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
         entries = json.loads(index.read_text(encoding="utf-8"))
         corpus_files = {candidate.relative_to(root).as_posix(): candidate.resolve()
                         for candidate in root.rglob("*") if candidate.is_file()}
+        manifest_entries = {}
         for entry in entries:
             relative = entry.get("file")
-            if not isinstance(relative, str) or relative not in corpus_files:
+            if not isinstance(relative, str):
                 continue
-            path = corpus_files[relative]
+            relative_path = Path(relative)
+            if relative_path.is_absolute() or ".." in relative_path.parts:
+                continue
+            manifest_entries[relative_path.as_posix()] = entry
+        for relative, path in corpus_files.items():
+            entry = manifest_entries.get(relative)
+            if entry is None:
+                continue
             if path.is_relative_to(resolved_root):
                 found.append((path, str(entry.get("doc_version", "unknown")),
                               bool(entry.get("superseded", False))))
